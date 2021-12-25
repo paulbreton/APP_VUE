@@ -13,6 +13,9 @@
                     <NuxtLink to="/users" class="hover:text-teal-200">
                         USERS
                     </NuxtLink>
+                    <NuxtLink to="/admin/admin" class="hover:text-teal-200">
+                        ADMIN 
+                    </NuxtLink>
                     <NuxtLink to="/dashboard" class="hover:text-teal-200">
                         DASHBOARD
                     </NuxtLink>
