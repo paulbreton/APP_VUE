@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\FriendController;
+use App\Http\Controllers\API\RolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::patch('/friends/{user}', [FriendController::class, 'update']);
     Route::get('/friends/{user}', [FriendController::class, 'deny']);
     Route::delete('/friends/{user}', [FriendController::class, 'destroy']);
+
+    Route::get('/roles', [RolesController::class, 'index']);
 });
