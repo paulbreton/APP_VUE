@@ -30,7 +30,4 @@ h1 {
     display: flex;
     justify-content: space-around;
 }
-.btn-admin {
-    padding: 4rem;
-}
 </style>
