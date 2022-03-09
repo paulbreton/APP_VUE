@@ -1,25 +1,7 @@
 <template>
-    <!-- <div class="container mx-auto mt-16 sm:px-6 lg:px-8">
-        <form @submit.prevent="login" class="bg-teal-500 rounded mx-auto px-6 py-6 w-1/2">
-            <div class="flex flex-col mt-3" v-if="errors">
-                <span class="text-red-200 italic">{{ errors }}</span>
-            </div>
-            <div class="flex flex-col mt-3">
-                <label for="email" class="text-white text-xl">Email</label>
-                <input type="email" v-model="form.email" class="px-2 py-1 rounded" placeholder="Email">
-            </div>
-            <div class="flex flex-col mt-3">
-                <label for="password" class="text-white text-xl">Password</label>
-                <input type="password" v-model="form.password" class="px-2 py-1 rounded" placeholder="Password">
-            </div>
-            <div class="text-center mt-3">
-                <teal-button type="submit">Login</teal-button>
-            </div>
-        </form>
-    </div> -->
-    <div class="container-desktop-admin">
-        <Login @login="login" :loading="loading"/>
-    </div>
+    <div class="container-login">
+        <Login @login="login" :loading="loading" />
+    </div>    
 </template>
 
 <script>
@@ -56,3 +38,15 @@ import Login from '../../components/user/Login.vue'
         }
     }
 </script>
+<style lang="css" scoped>
+.container-login {
+    height: calc(100vh - 76px);
+    overflow: hidden;
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 8rem;
+}
+
+</style>
