@@ -1,5 +1,8 @@
 <template>
-    <div class="container">
+    <div class="content-step-register">
+        <el-row type="flex" justify="center">
+            <h1>Inscription</h1>
+        </el-row>
         <el-steps :active="active" finish-status="success">
             <el-step title="Étape 1"></el-step>
             <el-step title="Étape 2"></el-step>
@@ -56,19 +59,33 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-/* .container {
-    margin: 7rem 20rem;
-    padding: 2rem;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-    min-width: 500px;
+<style scoped>
+.content-step-register, .is-process {
+    color: white !important;
 }
-
-@media screen and (max-width: 1000px){
-    .container {
-        margin: 1rem;
+.is-process {
+    border-color: none !important;
+} 
+h1 {
+    font-weight: 600;
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 2rem;
+}
+@media screen and (min-width: 800px) {
+    .content-step-register {
+        max-width: 600px;
+        margin: auto
     }
-    
-} */
+}
+</style>
+
+<style>
+.el-step__head.is-process {
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+}
+.el-step__title.is-process {
+    color: white;
+}
 </style>
