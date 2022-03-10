@@ -78,7 +78,7 @@ export default {
         redirect: {
             login: '/auth/login',
             logout: '/',
-            home: '/dashboard',
+            home: '/',
         }
     },
 

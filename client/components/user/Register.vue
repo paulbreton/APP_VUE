@@ -14,6 +14,13 @@
         <div class="input-email">
             <Input placeholder="Email" :value.sync="email" @handle-input="inputEmail" :isValid="isCorrectEmail(email)"/>
         </div>
+        <div class="label-pseudo">
+            Pseudo
+        </div>
+        <div class="input-pseudo">
+            <!--//TODO: chercher tous les pseudos deja enregistrer-->
+            <Input placeholder="Pseudo" :value.sync="pseudo" @handle-input="inputPseudo"/>
+        </div>
         <div class="label-password input-margin">
             Mot de passe
         </div>
@@ -48,6 +55,7 @@ export default {
         
         const name = ref('')
         const email = ref('')
+        const pseudo = ref('')
         const username = ref('')
         const pass1 = ref('')
         const pass2 = ref('')
@@ -60,6 +68,9 @@ export default {
         }
         const inputEmail = (data) => {
             email.value = data
+        }
+        const inputPseudo = (data) => {
+            pseudo.value = data
         }
 
         const {isCorrectPassword, isCorrectEmail, bothPasswordIsSame, allIsGood} = useControlePassword(pass1, pass2, email)
@@ -78,11 +89,13 @@ export default {
             name,
             username,
             email,
+            pseudo,
             pass1,
             pass2,
             input1,
             input2,
             inputEmail,
+            inputPseudo,
             isCorrectPassword,
             bothPasswordIsSame,
             isCorrectEmail,
@@ -149,11 +162,12 @@ function useControlePassword(password1, password2, email) {
 .content-grid {
   display: grid; 
   grid-template-columns: 1fr 2fr 1fr 2fr; 
-  grid-template-rows: 1fr 1fr auto 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr 1fr auto 1fr 1fr 1fr; 
   gap: 0 1rem; 
   grid-template-areas: 
     "label-name input-name label-user input-user"
     "label-email input-email input-email input-email"
+    "label-pseudo input-pseudo input-pseudo input-pseudo"
     "label-password label-password label-password label-password"
     "input-pass-1 input-pass-1 input-pass-1 input-pass-1"
     "input-pass-2 input-pass-2 input-pass-2 input-pass-2"
@@ -184,6 +198,14 @@ function useControlePassword(password1, password2, email) {
     grid-area: input-email;
     align-self: center;
 }
+.label-pseudo { 
+    grid-area: label-pseudo;
+    align-self: center;
+}
+.input-pseudo { 
+    grid-area: input-pseudo;
+    align-self: center;
+}
 .btn-submit {
     grid-area: btn-submit;
     justify-self: right;
@@ -191,4 +213,5 @@ function useControlePassword(password1, password2, email) {
 .label-password { grid-area: label-password; }
 .input-pass-1 { grid-area: input-pass-1; }
 .input-pass-2 { grid-area: input-pass-2; }
+
 </style>

@@ -4,7 +4,7 @@
             <h1>Connection</h1>
         </el-row>
         <el-input class="input" placeholder="Email" v-model="email"></el-input>
-        <el-input class="input" placeholder="Mot de passe" v-model="password"></el-input>   
+        <el-input class="input" placeholder="Mot de passe" v-model="password" show-password ></el-input>   
         <el-row type="flex" justify="center" class="btn-submit">
             <el-button v-loading.fullscreen.lock="loading" @click="submit">Connexion</el-button>
         </el-row>
@@ -67,5 +67,10 @@ h1 {
 button {
     background-color: white;
     color: var(--primary)
+}
+button:hover,
+button:focus {
+    color: var(--primary);
+    border-color: var(--primary);
 }
 </style>

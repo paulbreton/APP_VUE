@@ -30,6 +30,7 @@ import Login from '../../components/user/Login.vue'
                     this.loading = false
                 } catch (err) {
                     this.loading = false
+                    this.$message.error('Echec de la connexion');
                     if (err.response.status = 422) {
                         this.errors = 'Could not sign you in with those credentials.'
                     }

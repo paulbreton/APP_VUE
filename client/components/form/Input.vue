@@ -40,7 +40,6 @@ export default defineComponent({
             emit('handle-input', value)
         }
 
-
         return {
             handleInput,
         }
@@ -55,5 +54,8 @@ export default defineComponent({
 .el-input__icon.el-icon-check {
     font-weight: bold;
     color: var(--positive);
+}
+.el-input__inner:focus {
+    border: none;
 }
 </style>

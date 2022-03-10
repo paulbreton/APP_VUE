@@ -7,20 +7,17 @@
                     <NuxtLink to="/admin/admin" class="hover:text-teal-200">
                         Admin 
                     </NuxtLink>
-                    <NuxtLink to="/dashboard" class="hover:text-teal-200">
-                        Dashbord
-                    </NuxtLink>
-                    <NuxtLink to="index" class="hover:text-teal-200">
+                    <NuxtLink to="/" exact class="hover:text-teal-200">
                         Accueil
                     </NuxtLink>
-                    <a href="#" @click.prevent="logout" class="hover:text-teal-200">LOGOUT</a>
+                    <a href="#" @click.prevent="logout" class="hover:text-teal-200">Déconnexion</a>
                 </template>
                 <template v-else>
                     <NuxtLink to="/auth/register" class="hover:text-teal-200">
-                        REGISTER
+                        Inscription
                     </NuxtLink>
                     <NuxtLink to="/auth/login" class="hover:text-teal-200">
-                        LOGIN
+                        Connexion
                     </NuxtLink>
                 </template>
             </div>
