@@ -1,9 +1,17 @@
 <template>
-    <el-input :placeholder="placeholder"  @input="handleInput" :value="value" :show-password="password" :class="{success : isValid && value !=='', wrong: isValid === false && value !==''}"></el-input>
+    <el-input 
+        :placeholder="placeholder"
+        @input="handleInput"
+        :value="value"
+        :show-password="password"
+        :class="{success : isValid && value !=='', wrong: isValid === false && value !==''}"
+    >
+        <i slot="suffix" class="el-input__icon" :class="{ 'el-icon-check': isValid, 'el-icon-close': !isValid }" v-if="value"></i>
+    </el-input>
 </template>
 
 <script>
-import { defineComponent, ref, emit } from '@vue/composition-api'
+import { defineComponent, ref, emit, computed } from '@vue/composition-api'
 
 export default defineComponent({
     props: {
@@ -32,6 +40,7 @@ export default defineComponent({
             emit('handle-input', value)
         }
 
+
         return {
             handleInput,
         }
@@ -39,11 +48,12 @@ export default defineComponent({
 })
 </script>
 <style lang="css">
-.success .el-input__inner {
-   border-color: yellow; 
+.el-input__icon.el-icon-close {
+    font-weight: bold;
+    color: var(--negative);
 }
-.wrong .el-input__inner {
-    border-color: red;
+.el-input__icon.el-icon-check {
+    font-weight: bold;
+    color: var(--positive);
 }
-
 </style>
