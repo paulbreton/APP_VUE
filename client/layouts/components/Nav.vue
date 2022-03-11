@@ -26,12 +26,7 @@
 </template>
 
 <script>
-import { isMobile } from 'mobile-device-detect'
-
     export default {
-        data: ()=>({
-            device: 'mobile',
-        }),
         methods: {
             logout() {
                 this.$auth.logout()
