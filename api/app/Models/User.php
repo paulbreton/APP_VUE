@@ -2,15 +2,28 @@
 
 namespace App\Models;
 
+use App\Models\Roles;
 use App\Traits\Friendable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Class User
+ *
+ * @package App\Models\User
+ * @property int                $id
+ * @property string             $username
+ * @property string             $email
+ * @property string             $name
+ */
 class User extends Authenticatable
 {
     use Friendable, HasFactory, Notifiable;
+
+    public function role() {
+        return $this->belongsTo(Roles::class);
+    }
 
     /**
      * The attributes that are mass assignable.

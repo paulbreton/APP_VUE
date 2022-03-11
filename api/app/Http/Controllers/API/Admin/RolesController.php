@@ -1,21 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Filters\Admin\RolesFilter;
+use App\Http\Controllers\API\AbstractApiController;
 use App\Models\Roles;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\RolesRequest;
+use App\Managers\Admin\RolesManager;
 
-class RolesController extends Controller
+class RolesController extends AbstractApiController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(RolesManager $rolesManager)
     {
-        //
+       return $this->respond($rolesManager->getAll());
     }
 
     /**
@@ -23,9 +26,9 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(RolesRequest $request, RolesManager $rolesManager)
     {
-        //
+        return $this->respond($rolesManager->create(RolesFilter::fromRequest($request)));
     }
 
     /**

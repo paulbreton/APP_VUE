@@ -19,7 +19,7 @@
                     <NuxtLink to="/auth/register" class="hover:text-teal-200">
                         REGISTER
                     </NuxtLink>
-                    <NuxtLink to="/auth/login" class="hover:text-teal-200">
+                    <NuxtLink :to="`/auth/${device}/login`" class="hover:text-teal-200">
                         LOGIN
                     </NuxtLink>
                 </template>
@@ -29,7 +29,12 @@
 </template>
 
 <script>
+import { isMobile } from 'mobile-device-detect'
+
     export default {
+        data: ()=>({
+            device: 'mobile',
+        }),
         methods: {
             logout() {
                 this.$auth.logout()
