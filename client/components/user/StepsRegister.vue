@@ -3,26 +3,6 @@
         <el-row type="flex" justify="center">
             <h1>Inscription</h1>
         </el-row>
-        <!--
-        <el-steps :active="active" finish-status="success">
-            <el-step title="Étape 1"></el-step>
-            <el-step title="Étape 2"></el-step>
-            <el-step title="Étape 3"></el-step>
-        </el-steps>
-        <el-form v-if="active===0">
-            <Register @steps="nextStep" :loading="loading"/>
-        </el-form>
-        <el-form v-if="active===1">
-            <Personality />
-        </el-form>
-        <el-form v-if="active===2">
-        <Congratulation /> 
-        </el-form>
-        <el-form v-if="active===3">
-            <Login />
-        </el-form>
-        <el-button @click="previousStep">Previous</el-button>
-        <el-button @click="nextStep">NExt</el-button>-->
 
         <Register @steps="nextStep" :loading="loading"/>
     </div>
