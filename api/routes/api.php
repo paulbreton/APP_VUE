@@ -17,26 +17,28 @@ use App\Http\Controllers\API\Admin\RolesController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')
+     ->get('/user', function(Request $request) {
+         return $request->user();
+     });
+Route::middleware(['auth:sanctum'])
+     ->group(function() {
+         Route::get('/users', [
+             UserController::class,
+             'index',
+         ]);
+         Route::get('/user/{user}', [
+             UserController::class,
+             'show',
+         ]);
+         Route::get('/friends', [FriendController::class, 'index']);
+         Route::post('/friends/{user}', [FriendController::class, 'store']);
+         Route::patch('/friends/{user}', [FriendController::class, 'update']);
+         Route::get('/friends/{user}', [FriendController::class, 'deny']);
+         Route::delete('/friends/{user}', [FriendController::class, 'destroy']);
 });
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/users', [UserController::class, 'index']);
-    Route::get('/user/{user}', [UserController::class, 'show']);
+Route::apiResource('roles', RolesController::class);
 
-    Route::get('/friends', [FriendController::class, 'index']);
-    Route::post('/friends/{user}', [FriendController::class, 'store']);
-    Route::patch('/friends/{user}', [FriendController::class, 'update']);
-    Route::get('/friends/{user}', [FriendController::class, 'deny']);
-    Route::delete('/friends/{user}', [FriendController::class, 'destroy']);
+//Route::apiResource('admin/users', UserController::class);
 
-    // Route::get('/roles', [RolesController::class, 'index']);
-
-    Route::apiResource('roles', RolesController::class, [
-        'only'=> [
-            'index',
-            'create',
-        ]
-    ]);
-});

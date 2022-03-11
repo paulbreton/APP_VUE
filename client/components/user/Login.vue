@@ -1,17 +1,13 @@
 <template>
     <div class="login">
-        <el-card>
-            <el-row type="flex" justify="center">
-                <h3>Connection</h3>
-            </el-row>
-            <p>Email</p>
-            <el-input placeholder="Entrez quelque chose" v-model="email"></el-input>   
-            <p>Mot de passe</p>
-            <el-input placeholder="Entrez quelque chose" v-model="password"></el-input>   
-            <el-row type="flex" justify="end" class="btn-submit">
-                <el-button type="primary" v-loading.fullscreen.lock="loading" @click="submit">Connexion</el-button>
-            </el-row>   
-        </el-card>
+        <el-row type="flex" justify="center">
+            <h1>Connection</h1>
+        </el-row>
+        <el-input class="input" placeholder="Email" v-model="email"></el-input>
+        <el-input class="input" placeholder="Mot de passe" v-model="password" show-password ></el-input>   
+        <el-row type="flex" justify="center" class="btn-submit">
+            <el-button v-loading.fullscreen.lock="loading" @click="submit">Connexion</el-button>
+        </el-row>
     </div> 
 </template>
 
@@ -47,15 +43,34 @@ export default defineComponent({
 
 <style lang="css" scoped>
 .login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
+    background-color: var(--primary);
+    padding: 4rem 4rem 3rem 4rem;
+    color: white;
 }
-.el-card {
-    width: 400px;
+
+@media screen and (min-width: 800px) {
+    .login {
+        max-width: 600px;
+        margin: auto
+    }
+}
+.input {
+    margin-top: 2rem;
 }
 .btn-submit {
-    margin-top: 1rem;
+    margin-top: 2rem;
+}
+h1 {
+    font-weight: 600;
+    font-size: 2rem;
+}
+button {
+    background-color: white;
+    color: var(--primary)
+}
+button:hover,
+button:focus {
+    color: var(--primary);
+    border-color: var(--primary);
 }
 </style>

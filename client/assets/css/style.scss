@@ -2,6 +2,12 @@
     margin: 7rem 20rem;
 }
 
+:root {
+	--primary: rgb(56, 178, 172);
+    --positive: #f6ad55;
+    --negative: red;
+}
+
 body {
     background-color: #ffffff;
 }
@@ -18,4 +24,12 @@ body {
 .el-loading-spinner {
     display: flex;
     justify-content: center;
+}
+
+.el-loading-mask {
+    background-color: var(--primary);       
+}
+.el-loading-spinner .path {
+    stroke: white;
+    stroke-width: 5px;
 }

@@ -26,7 +26,7 @@ class RedirectIfAuthenticated
               if ($request->expectsJson()) {
                 return response()->json(['error' => 'Already authenticated.'], 200);
               }
-              return redirect(url(env('SPA_URL') . '/dashboard'));
+              return redirect(url(env('SPA_URL') . '/'));
             }
         }
 
