@@ -2,15 +2,30 @@
 
 namespace App\Models;
 
+use App\Models\Roles;
 use App\Traits\Friendable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * Class User
+ *
+ * @package App\Models\User
+ * @property int    $id
+ * @property string $username
+ * @property string $email
+ * @property string $name
+ */
 class User extends Authenticatable
 {
-    use Friendable, HasFactory, Notifiable;
+    use Friendable, HasFactory, Notifiable, HasApiTokens;
+
+    public function role()
+    {
+        return $this->belongsTo(Roles::class);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -22,8 +37,9 @@ class User extends Authenticatable
         'email',
         'password',
         'username',
+        'pseudo',
+        'role_id',
     ];
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -33,7 +49,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
     /**
      * The attributes that should be cast to native types.
      *

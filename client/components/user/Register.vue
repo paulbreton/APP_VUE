@@ -81,7 +81,8 @@ export default {
                 username: username.value,
                 email: email.value,
                 password: pass1.value,
-                password_confirmation: pass2.value
+                password_confirmation: pass2.value,
+                pseudo: pseudo.value,
             })
         }
 

@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\FriendController;
+use App\Http\Controllers\API\Admin\RolesController;
+use App\Http\Controllers\TokenController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,13 +33,29 @@ Route::middleware(['auth:sanctum'])
              UserController::class,
              'show',
          ]);
-         Route::get('/friends', [FriendController::class, 'index']);
-         Route::post('/friends/{user}', [FriendController::class, 'store']);
-         Route::patch('/friends/{user}', [FriendController::class, 'update']);
-         Route::get('/friends/{user}', [FriendController::class, 'deny']);
-         Route::delete('/friends/{user}', [FriendController::class, 'destroy']);
-});
+         Route::get('/friends', [
+             FriendController::class,
+             'index',
+         ]);
+         Route::post('/friends/{user}', [
+             FriendController::class,
+             'store',
+         ]);
+         Route::patch('/friends/{user}', [
+             FriendController::class,
+             'update',
+         ]);
+         Route::get('/friends/{user}', [
+             FriendController::class,
+             'deny',
+         ]);
+         Route::delete('/friends/{user}', [
+             FriendController::class,
+             'destroy',
+         ]);
+     });
 
+Route::apiResource('roles', RolesController::class);
 
 //Route::apiResource('admin/users', UserController::class);
 
