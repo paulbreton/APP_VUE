@@ -26,7 +26,6 @@ export default defineComponent({
         },
         isValid: {
             type: Boolean,
-            default: '',
             require: false
         },
         placeholder: {

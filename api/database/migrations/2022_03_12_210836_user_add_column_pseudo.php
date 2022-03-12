@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UsersAddColomnForeignKeyRole extends Migration
+class UserAddColumnPseudo extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class UsersAddColomnForeignKeyRole extends Migration
     public function up()
     {
         Schema::table('users', function(Blueprint $table) {
-            $table->unsignedBigInteger('role_id')->nullable();
-            $table->foreign('role_id')->references('id')->on('roles');
+            $table->string('pseudo');
         });
     }
 
@@ -27,8 +26,7 @@ class UsersAddColomnForeignKeyRole extends Migration
     public function down()
     {
         Schema::table('users', function(Blueprint $table) {
-            $table->dropForeign('role_id');
-            $table->dropColumn('role_id');
+            $table->dropColumn('pseudo');
         });
     }
 }

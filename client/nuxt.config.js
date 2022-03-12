@@ -2,9 +2,9 @@ export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         title: process.env.npm_package_name || '',
-        titleTemplate: 'Friendzy %s',
+        titleTemplate: 'Association',
         htmlAttrs: {
-            lang: 'en'
+            lang: 'fr'
         },
         meta: [
             { charset: 'utf-8' },
