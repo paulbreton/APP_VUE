@@ -3,6 +3,9 @@
 }
 
 .card-admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border-radius: 1rem;
     background-color: var(--background-secondary);
 
@@ -15,7 +18,23 @@
         color: var(--text-primary);
         padding: 1rem 0;
         font-weight: 800;
+        font-size: 1.25rem;
     }
+    .actions {
+        .el-button {
+            background-color: var(--background-secondary);
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+        }
+    
+        .el-button i,
+        button:hover  {
+            color: var(--text-secondary);
+            outline: none;
+        }
+    }
+    
 }
 
 :root {
@@ -117,7 +136,7 @@ body {
         grid-template-areas:
         "stat stat"
         "list-user list-planned-game"
-        "list-drafts-game .";
+        "list-user list-drafts-game";
     }
 }
 
@@ -128,15 +147,5 @@ body {
 @media screen and (min-width: 1280px) {
     .padding-content {
         padding: 1rem 20rem;
-    }
-
-    .content-admin {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto 1fr 1fr;
-        grid-auto-columns: 1fr;
-        grid-template-areas:
-        "stat stat"
-        "list-user list-planned-game"
-        "list-drafts-game .";
     }
 }
