@@ -33,16 +33,6 @@ export default {
 .actions {
   color: var(--text-primary);
   margin: 1rem;
-  text-align: right;
-  
-  .el-button {
-    background-color: var(--background-secondary);
-    border: none;
-    color: var(--text-primary);
-    svg {
-      margin: 0 0 0 0.5rem;
-      color: var(--text-secondary);
-    }
-  }
+  text-align: right;  
 }
 </style>

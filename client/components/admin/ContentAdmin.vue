@@ -5,16 +5,22 @@
         </div>
         <div class="list-user">
             <CardTable title="Utilisateur inscrit" :data="users">
-                <template>
-                    <el-button><span>TdB<font-awesome-icon icon="plus" /></span></el-button>
-                </template>
+                
             </CardTable>
         </div>
         <div class="list-planned-game">
-            <CardTable title="Parties planifiées" :data="[]"/>
+            <CardTable title="Parties planifiées" :data="[]">
+                <template>
+                    <el-button icon="el-icon-plus">Ajouter</el-button>
+                </template>
+            </CardTable>
         </div>
         <div class="list-drafts-game">
-            <CardTable title="Mes brouillons" :data="[]"/>
+            <CardTable title="Mes brouillons" :data="[]">
+                <template>
+                    <el-button icon="el-icon-plus">Créer</el-button>
+                </template>
+            </CardTable>
         </div>
     </div>
 </template>

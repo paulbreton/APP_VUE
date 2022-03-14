@@ -1,5 +1,5 @@
 <template>
-  <div class="card-stat card-admin">
+  <div class="card-stat">
     <div class="content">
       <div class="label">250</div>
       <div class="icon"><font-awesome-icon icon="user-check" /></div>
@@ -32,6 +32,7 @@ export default {
   width: 100%;
   background-color: var(--background-secondary);
   color: var(--text-primary);
+  border-radius: 1rem;
 
   .content {
     display: flex;
