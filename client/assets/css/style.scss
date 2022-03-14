@@ -2,12 +2,20 @@
     margin: 7rem 20rem;
 }
 
-.padding-content {
-    padding: 0 4rem;
-}
-
 .card-admin {
     border-radius: 1rem;
+    background-color: var(--background-secondary);
+
+    width: 100%;
+    height: 100%;
+    min-width: 20rem;
+    
+    .title {
+        text-align: center;
+        color: var(--text-primary);
+        padding: 1rem 0;
+        font-weight: 800;
+    }
 }
 
 :root {
@@ -19,10 +27,13 @@
     //--vert: #788402;
     --background: #342628;
     --background-secondary: #4C3D3F;
+
+    --tablet: 800px;
+    --mobile: 900px;
 }
 
 body {
-    background-color: #ffffff;
+    background-color: var(--background);
 }
 
 .box {
@@ -65,5 +76,67 @@ body {
         border: none;
         opacity: 0.5;
     }
-    
+}
+
+/*  =================================================================
+                        RESPONSIVE
+    ================================================================= */
+
+//
+// MOBILE
+//
+.padding-content {
+    padding: 1rem 2rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .content-admin {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        grid-auto-columns: 1fr;
+        grid-template-areas:
+        "stat"
+        "list-user"
+        "list-planned-game"
+        "list-drafts-game";
+    }
+}
+
+//
+// TABLET
+//
+@media screen and (min-width: 1024px) {
+    .padding-content {
+        padding: 1rem 6rem;
+    }
+
+    .content-admin {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr 1fr;
+        grid-auto-columns: 1fr;
+        grid-template-areas:
+        "stat stat"
+        "list-user list-planned-game"
+        "list-drafts-game .";
+    }
+}
+
+
+//
+// DESKTOP
+//
+@media screen and (min-width: 1280px) {
+    .padding-content {
+        padding: 1rem 20rem;
+    }
+
+    .content-admin {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr 1fr;
+        grid-auto-columns: 1fr;
+        grid-template-areas:
+        "stat stat"
+        "list-user list-planned-game"
+        "list-drafts-game .";
+    }
 }

@@ -1,10 +1,10 @@
 export const state = () => ({
-  user: null,
+  users: [],
 })
 
 export const mutations = {
-  setUser (state, user) {
-    state.user = user
+  setUsers (state, users) {
+    state.users = users
   }
 }
 
@@ -12,4 +12,9 @@ export const getters = {
   get: (state) => state.user,
 }
 
-export const actions = {}
+export const actions = {
+  async fetchAllUsers({ commit }) {
+    const users = await this.$axios.$get('api/users')
+    commit('setUsers', users.users)
+  },
+}

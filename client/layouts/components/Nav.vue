@@ -1,6 +1,6 @@
 <template>
     <div class="text-md nav">
-        <nav class="wrapper flex justify-between items-center py-5">
+        <nav class="padding-content flex justify-between items-center py-5">
             <span class="font-semibold text-2xl title">Association</span>
             <div class="space-x-2">
                 <template v-if="this.$auth.loggedIn">
@@ -35,10 +35,8 @@
     }
 </script>
 <style lang="scss" scoped>
-.wrapper {
-    padding: 1rem 4rem;
-}
 .nav {
+    padding: 1rem 0;
     background-color: var(--background);
     color: var(--text-primary);
 
