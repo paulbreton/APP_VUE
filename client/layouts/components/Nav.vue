@@ -1,22 +1,22 @@
 <template>
-    <div class="bg-teal-500 text-white text-md">
-        <nav class="container flex justify-between items-center mx-auto py-5">
-            <span class="font-semibold text-2xl">Association</span>
+    <div class="text-md nav">
+        <nav class="wrapper flex justify-between items-center py-5">
+            <span class="font-semibold text-2xl title">Association</span>
             <div class="space-x-2">
                 <template v-if="this.$auth.loggedIn">
-                    <NuxtLink to="/admin/admin" class="hover:text-teal-200">
+                    <NuxtLink to="/admin/admin">
                         Admin 
                     </NuxtLink>
-                    <NuxtLink to="/" exact class="hover:text-teal-200">
+                    <NuxtLink to="/" exact>
                         Accueil
                     </NuxtLink>
-                    <a href="#" @click.prevent="logout" class="hover:text-teal-200">Déconnexion</a>
+                    <a href="#" @click.prevent="logout">Déconnexion</a>
                 </template>
                 <template v-else>
-                    <NuxtLink to="/auth/register" class="hover:text-teal-200">
+                    <NuxtLink to="/auth/register">
                         Inscription
                     </NuxtLink>
-                    <NuxtLink to="/auth/login" class="hover:text-teal-200">
+                    <NuxtLink to="/auth/login">
                         Connexion
                     </NuxtLink>
                 </template>
@@ -34,3 +34,20 @@
         }
     }
 </script>
+<style lang="scss" scoped>
+.wrapper {
+    padding: 1rem 4rem;
+}
+.nav {
+    background-color: var(--background);
+    color: var(--text-primary);
+
+    a:hover {
+        color: var(--text-secondary);
+        
+    }
+    .title {
+        color: var(--text-secondary);
+    }
+}
+</style>

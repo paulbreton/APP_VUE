@@ -53,7 +53,7 @@ export default {
 h1 {
     font-weight: 600;
     font-size: 2rem;
-    color: white;
+    color: var(--text-secondary);
     margin-bottom: 2rem;
 }
 @media screen and (min-width: 800px) {

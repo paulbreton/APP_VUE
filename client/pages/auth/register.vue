@@ -48,7 +48,7 @@ import StepsRegister from '../../components/user/StepsRegister.vue'
 <style scoped>
 .container-register {
     height: calc(100vh - 76px);
-    background-color: var(--primary);
+    background-color: var(--background);
     display: flex;
     flex-direction: column;
     justify-content: center;
