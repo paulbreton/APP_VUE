@@ -2,10 +2,23 @@
     margin: 7rem 20rem;
 }
 
+.padding-content {
+    padding: 0 4rem;
+}
+
+.card-admin {
+    border-radius: 1rem;
+}
+
 :root {
-	--primary: rgb(56, 178, 172);
     --positive: #f6ad55;
     --negative: red;
+
+    --text-primary: #F7F4EF;
+    --text-secondary: #FEAA00;
+    //--vert: #788402;
+    --background: #342628;
+    --background-secondary: #4C3D3F;
 }
 
 body {
@@ -32,4 +45,25 @@ body {
 .el-loading-spinner .path {
     stroke: white;
     stroke-width: 5px;
+}
+
+.btn-backgound-dark {
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    border: none;
+
+    &:hover,
+    &:focus {
+        color: var(--text-secondary);
+        background-color: var(--background-secondary);
+        border: none;
+        outline: none;
+    }
+    &.is-disabled {
+        background-color: var(--background-secondary);
+        color: var(--text-primary);
+        border: none;
+        opacity: 0.5;
+    }
+    
 }
