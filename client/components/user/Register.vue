@@ -31,7 +31,7 @@
             <Input placeholder="Confirmation mot de passe" :value.sync="pass2" @handle-input="input2" :password="true" :isValid="bothPasswordIsSame(pass1, pass2)"/>
         </div>
         <el-row type="flex" justify="end" class="btn-submit">
-            <el-button @click="submit" v-loading.fullscreen.lock="loading" :disabled="!allIsGood(email, pass1, pass2)">Valider</el-button>
+            <el-button class="btn-backgound-dark" @click="submit" v-loading.fullscreen.lock="loading" :disabled="!allIsGood(email, pass1, pass2)">Valider</el-button>
         </el-row>
     </div>
     

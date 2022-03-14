@@ -1,8 +1,16 @@
 export const state = {
-  roles: [],
+  roles: [
+    { id: null, label: 'Aucun'},
+    { id: 1, label: 'Admin', value: 'ADMIN' },
+    { id: 2, label: 'Superadmin', value: 'SUPERADMIN' },
+    { id: 3, label: 'Membre', value:'MEMBER' },
+    { id: 4, labal: 'Free', value: 'FREE' },
+  ],
 }
 
-export const getters = {}
+export const getters = {
+  getById: (state) => (id) => state.roles.find((role) => role.id === id)
+}
 
 export const mutations = {
   setRoles(state, roles) {

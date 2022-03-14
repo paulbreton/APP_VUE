@@ -1,7 +1,7 @@
 <template>
   <div class="container max-w-6xl mx-auto mt-48 sm:px-6 lg:px-8">
-      <div class="flex justify-center items-center bg-teal-200 h-56">
-          <span class="text-gray-700 text-5xl">Association</span>
+      <div class="flex justify-center items-center bg-teal-200 h-56 test">
+          <span class="text-5xl">Association</span>
       </div>
   </div>
 </template>
@@ -11,3 +11,10 @@ export default {
     middleware: 'guest',
 }
 </script>
+
+<style lang="scss" scoped>
+.test {
+    background-color: var(--background);
+    color: var(--text-secondary);
+}
+</style>

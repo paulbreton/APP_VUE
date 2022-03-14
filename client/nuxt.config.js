@@ -38,6 +38,7 @@ export default {
         // https://go.nuxtjs.dev/tailwindcss
         '@nuxtjs/tailwindcss',
         '@nuxtjs/composition-api/module',
+        '@nuxtjs/fontawesome',
     ],
 
     // Modules: https://go.nuxtjs.dev/config-modules
@@ -45,6 +46,7 @@ export default {
         // https://go.nuxtjs.dev/axios
         '@nuxtjs/axios',
         '@nuxtjs/auth-next',
+        '@nuxtjs/i18n',
         // '@nuxtjs/composition-api/',
     ],
 
@@ -83,5 +85,12 @@ export default {
     },
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
-    build: {}
+    build: {},
+
+    fontawesome: {
+        icons: {
+            solid:true,
+            brands:true
+        }
+    }
 }

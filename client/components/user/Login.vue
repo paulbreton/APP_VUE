@@ -6,7 +6,7 @@
         <el-input class="input" placeholder="Email" v-model="email"></el-input>
         <el-input class="input" placeholder="Mot de passe" v-model="password" show-password ></el-input>   
         <el-row type="flex" justify="center" class="btn-submit">
-            <el-button v-loading.fullscreen.lock="loading" @click="submit">Connexion</el-button>
+            <el-button v-loading.fullscreen.lock="loading" @click="submit" class="btn-backgound-dark">Connexion</el-button>
         </el-row>
     </div> 
 </template>
@@ -43,9 +43,9 @@ export default defineComponent({
 
 <style lang="css" scoped>
 .login {
-    background-color: var(--primary);
+    background-color: var(--background);
     padding: 4rem 4rem 3rem 4rem;
-    color: white;
+    color: var(--text-primary);
 }
 
 @media screen and (min-width: 800px) {
@@ -63,14 +63,14 @@ export default defineComponent({
 h1 {
     font-weight: 600;
     font-size: 2rem;
+    color: var(--text-secondary);
 }
-button {
-    background-color: white;
-    color: var(--primary)
-}
-button:hover,
-button:focus {
-    color: var(--primary);
-    border-color: var(--primary);
+</style>
+
+<style lang="scss">
+.el-input__inner {
+    background-color: var(--background-secondary);
+    border: none;
+    color: var(--text-primary);
 }
 </style>

@@ -1,33 +1,31 @@
 <template>
-    <div class="container-desktop-admin">
+    <div class="container-admin">
         <h1>Administration</h1>
-        <div class="box group-btn">
-            <el-button type="primary" class="btn-admin">Parties</el-button>
-            <el-button type="primary" class="btn-admin">Mails</el-button>
-            <el-button type="primary" class="btn-admin">Finances</el-button>
-        </div>
-        <div class="box">
-            <ContentAdmin />
-        </div>
+        <Content />
     </div>
 </template>
 
 <script>
-import ContentAdmin from '../../components/admin/ContentAdmin.vue'
+import Content from '@/components/admin/ContentAdmin.vue'
 
 export default {
     middleware: 'auth',
     components: {
-        ContentAdmin
-    },
+        Content,
+    }
 }
 </script>
 <style lang="css" scoped>
 h1 {
     text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    padding: 2rem 0;
+    color: var(--text-secondary);
 }
-.group-btn {
+.container-admin {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    background-color: var(--background);
 }
 </style>
