@@ -46,6 +46,7 @@ export default {
         // https://go.nuxtjs.dev/axios
         '@nuxtjs/axios',
         '@nuxtjs/auth-next',
+        '@nuxtjs/i18n',
         // '@nuxtjs/composition-api/',
     ],
 
