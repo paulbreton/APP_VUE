@@ -107,17 +107,25 @@ body {
 .padding-content {
     padding: 1rem 2rem;
 }
+.nav-mobile {
+    display: block;
+}
+
+.content-admin {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-auto-columns: 1fr;
+    grid-template-areas:
+    "stat"
+    "list-user"
+    "list-planned-game"
+    "list-drafts-game";
+    margin-bottom: 6rem;
+}
 
 @media screen and (max-width: 1024px) {
-    .content-admin {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto auto;
-        grid-auto-columns: 1fr;
-        grid-template-areas:
-        "stat"
-        "list-user"
-        "list-planned-game"
-        "list-drafts-game";
+    .nav-desktop {
+        display: none;
     }
 }
 
@@ -128,7 +136,12 @@ body {
     .padding-content {
         padding: 1rem 6rem;
     }
-
+    .nav-mobile {
+        display: none;
+    }
+    .nav-desktop {
+        display: block;
+    }
     .content-admin {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto 1fr 1fr;
@@ -147,5 +160,8 @@ body {
 @media screen and (min-width: 1280px) {
     .padding-content {
         padding: 1rem 20rem;
+    }
+    .nav-desktop {
+        display: block;
     }
 }

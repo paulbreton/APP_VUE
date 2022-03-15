@@ -47,7 +47,6 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-bottom: 8rem;
 }
 
 </style>
