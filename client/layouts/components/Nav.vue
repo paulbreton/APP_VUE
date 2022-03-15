@@ -1,5 +1,5 @@
 <template>
-    <div class="text-md nav">
+    <div class="text-md nav-desktop">
         <nav class="padding-content flex justify-between items-center py-5">
             <span class="font-semibold text-2xl title">Association</span>
             <div class="space-x-2">
@@ -35,7 +35,7 @@
     }
 </script>
 <style lang="scss" scoped>
-.nav {
+.nav-desktop {
     padding: 1rem 0;
     background-color: var(--background);
     color: var(--text-primary);
