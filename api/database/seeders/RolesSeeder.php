@@ -16,6 +16,7 @@ class RolesSeeder extends Seeder
     {
         DB::table('roles')
           ->insert([
+              ['label' => 'AUCUN'],
               ['label' => 'ADMIN'],
               ['label' => 'SUPERADMIN'],
               ['label' => 'MEMBER'],
