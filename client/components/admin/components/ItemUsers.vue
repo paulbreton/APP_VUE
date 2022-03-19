@@ -1,12 +1,14 @@
 <template>
-  <div class="item">
+  <div class="item" @click="openDialog">
     <div class="pseudo">{{ user.pseudo }}</div>
-    <div class="role">{{ role(user.role_id) }}</div>
-    <div class="action"><el-button type="text" class="delete" @click="deleteUser"><font-awesome-icon icon="trash" /></el-button></div>
+    <div class="role">{{ user.role.label }}</div>
+    <div class="action"><el-button type="text" class="delete" @click.stop="deleteUser"><font-awesome-icon icon="trash" /></el-button></div>
   </div>
 </template>
+
 <script>
 import { useStore } from '@nuxtjs/composition-api'
+
 export default {
   props: {
     user: {
@@ -14,15 +16,15 @@ export default {
       required: true, 
     },
   },
-  setup({ props }) {
+  setup(props, { emit }) {
     const store = useStore()
-    const role = (id) => (store.getters['roles/getById'](id)).label
+    const deleteUser = async () => await store.dispatch('user/delete', props.user.id)
 
-    const deleteUser = async () => await store.dispatch('user/delete', props.user)
+    const openDialog = () => emit('open-dialog', props.user)
 
     return {
-      role,
       deleteUser,
+      openDialog,
     }
   },
 }
@@ -38,12 +40,13 @@ export default {
   background-color: var(--background);
   color: var(--text-primary);
   border-radius: 5px;
-  margin: 1rem;
+  margin-bottom: 1rem;
   padding: 0.5rem;
   grid-template-areas:
     "pseudo role action";
   align-items: center;
   justify-items: center;
+  cursor: pointer;
 }
 
 .pseudo { 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
@@ -18,11 +19,10 @@ use App\Http\Controllers\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::middleware('auth:sanctum')
-     ->get('/user', function(Request $request) {
-         return $request->user();
-     });
+    ->get('/user', function(Request $request) {
+        return UserResource::make($request->user());
+    });
 Route::middleware(['auth:sanctum'])
      ->group(function() {
          Route::get('/users', [
@@ -33,29 +33,16 @@ Route::middleware(['auth:sanctum'])
              UserController::class,
              'show',
          ]);
-         Route::get('/friends', [
-             FriendController::class,
-             'index',
-         ]);
-         Route::post('/friends/{user}', [
-             FriendController::class,
-             'store',
-         ]);
-         Route::patch('/friends/{user}', [
-             FriendController::class,
+         Route::delete('/user/{user}', [
+            UserController::class,
+            'destroy',
+        ]);
+         Route::put('/user/{user}', [
+             UserController::class,
              'update',
-         ]);
-         Route::get('/friends/{user}', [
-             FriendController::class,
-             'deny',
-         ]);
-         Route::delete('/friends/{user}', [
-             FriendController::class,
-             'destroy',
          ]);
      });
 
 Route::apiResource('roles', RolesController::class);
 
-//Route::apiResource('admin/users', UserController::class);
 

@@ -2,67 +2,69 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use App\Filters\UserFilters;
+use App\Http\Controllers\AbstractApiController;
+use App\Http\Requests\userUpdateRequest;
+use App\Http\Resources\UserResource;
+use App\Models\Roles;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Managers\UserManager;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class UserController extends Controller
+class UserController extends AbstractApiController
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function index() {
-        return response(['users' => User::where('id', '!=', request()->user()->id)->get()]);
-    }
+    public function index(UserManager $userManager) {
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return response(UserResource::collection($userManager->getAll()));
     }
-
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return Response
      */
     public function show(User $user) {
-        return response([
-            'user' => $user,
-            'isFriendsWith' => request()->user()->is_friends_with($user->id),
-            'friendRequestSentTo' => request()->user()->has_pending_friend_request_sent_to($user->id),
-            'friendRequestSentFrom' => request()->user()->has_pending_friend_request_from($user->id),
-        ]);
+        return response(UserResource::make($user));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param userUpdateRequest $request
+     * @param User $user
+     * @return JsonResponse
      */
-    public function update(Request $request, User $user)
-    {
-        //
+    public function update(userUpdateRequest $request, User $user) {
+        $filter = new UserFilters();
+        if($request->input('role_id')) {
+            $filter->role_id = $request->input('role_id');
+        }
+
+        if (Roles::findOrFail($filter->role_id)) {
+            $user->update(['role_id' => $filter->role_id]);
+        }
+
+        return $this->respondEmpty();
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @param UserManager $userManager
+     * @return JsonResponse
      */
-    public function destroy(User $user)
+    public function destroy(int $id, UserManager $userManager)
     {
-        //
+        $deleteUser = $userManager->delete($id);
+
+        if($deleteUser === 0) {
+            throw new NotFoundHttpException("Can not delete user with id $id");
+        }
+
+        return $this->respondEmpty();
     }
 }

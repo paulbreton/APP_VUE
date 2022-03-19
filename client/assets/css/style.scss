@@ -20,6 +20,9 @@
         font-weight: 800;
         font-size: 1.25rem;
     }
+    .list {
+        padding: 1rem;
+    }
     .actions {
         .el-button {
             background-color: var(--background-secondary);
@@ -43,6 +46,7 @@
 
     --text-primary: #F7F4EF;
     --text-secondary: #FEAA00;
+    --text-secondary-disabled: #2ADE69;
     //--vert: #788402;
     --background: #342628;
     --background-secondary: #4C3D3F;
@@ -126,6 +130,12 @@ body {
 @media screen and (max-width: 1024px) {
     .nav-desktop {
         display: none;
+    }
+
+    .el-dialog {
+        width: auto;
+        margin-left: 4rem;
+        margin-right: 4rem;
     }
 }
 

@@ -5,7 +5,11 @@
         </div>
         <div class="list-user">
             <CardTable title="Utilisateur inscrit" :data="users">
-                
+                <template>
+                    <NuxtLink to="/admin/users">
+                            <el-button icon="el-icon-plus">TdB Utilisateurs</el-button>
+                    </NuxtLink>
+                </template>                
             </CardTable>
         </div>
         <div class="list-planned-game">
@@ -41,6 +45,7 @@ export default defineComponent({
 
         onMounted(async () => {
             await store.dispatch('user/fetchAllUsers')
+            await store.dispatch('roles/fetch')
         })
 
         const users = computed(() => store.state.user.users)

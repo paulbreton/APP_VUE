@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Roles;
 use App\Traits\Friendable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -22,11 +23,20 @@ class User extends Authenticatable
 {
     use Friendable, HasFactory, Notifiable, HasApiTokens;
 
-    public function role()
+    /**
+     * @return BelongsTo
+     */
+    public function role() :BelongsTo
     {
-        return $this->belongsTo(Roles::class);
+        return $this->belongsTo(Roles::class, 'role_id', 'id');
     }
 
+    public function isSuperAdmin() {
+        return $this->role_id === 2;
+    }
+    public function isAdmin() {
+        return $this->role_id === 1;
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -39,6 +49,14 @@ class User extends Authenticatable
         'username',
         'pseudo',
         'role_id',
+    ];
+
+    protected $visible = [
+        'name',
+        'email',
+        'pseudo',
+        'role_id',
+        'username',
     ];
     /**
      * The attributes that should be hidden for arrays.

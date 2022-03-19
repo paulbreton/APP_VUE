@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace App\Managers\Admin;
 
 use App\Filters\Admin\RolesFilter;
 use App\Managers\CommonManager;
 use App\Repositories\RolesRepository;
+use Illuminate\Support\Facades\Auth;
 
 class RolesManager extends CommonManager
 {
@@ -12,15 +13,14 @@ class RolesManager extends CommonManager
         $this->repository = $roleRepository;
     }
 
-    public function create(RolesFilter $role) {
-        $this->repository->createRole($role->label);
-    }
-
-    public function delete(int $id) {
-        $this->repository->delete($id);
-    }
-
     public function getAll() {
-        return $this->repository->getAll();
+        $user = Auth::user();
+
+        if($user->isSuperAdmin()){
+            $res = $this->repository->getAll();
+        } else if($user->isAdmin()) {
+            $res = $this->repository->whereUserIsAdmin();
+        }
+        return $res;
     }
 }
