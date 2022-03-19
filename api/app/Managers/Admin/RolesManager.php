@@ -18,7 +18,7 @@ class RolesManager extends CommonManager
 
         if($user->isSuperAdmin()){
             $res = $this->repository->getAll();
-        } else {
+        } else if($user->isAdmin()) {
             $res = $this->repository->whereUserIsAdmin();
         }
         return $res;

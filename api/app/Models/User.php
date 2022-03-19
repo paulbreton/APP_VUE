@@ -34,11 +34,9 @@ class User extends Authenticatable
     public function isSuperAdmin() {
         return $this->role_id === 2;
     }
-
     public function isAdmin() {
-
+        return $this->role_id === 1;
     }
-
     /**
      * The attributes that are mass assignable.
      *
