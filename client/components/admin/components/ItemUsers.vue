@@ -2,7 +2,7 @@
   <div class="item" @click="openDialog">
     <div class="pseudo">{{ user.pseudo }}</div>
     <div class="role">{{ user.role.label }}</div>
-    <div class="action"><el-button type="text" class="delete" @click="deleteUser"><font-awesome-icon icon="trash" /></el-button></div>
+    <div class="action"><el-button type="text" class="delete" @click.stop="deleteUser"><font-awesome-icon icon="trash" /></el-button></div>
   </div>
 </template>
 
