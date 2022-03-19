@@ -9,7 +9,6 @@ use App\Http\Resources\UserResource;
 use App\Models\Roles;
 use App\Models\User;
 use App\Managers\UserManager;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

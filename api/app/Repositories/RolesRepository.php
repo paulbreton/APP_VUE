@@ -8,18 +8,15 @@ class RolesRepository extends BaseRepository
     {
         parent::__construct($model);
     }
-    
-    public function createRole(string $label) {
-        Roles::create([
-            'label' => $label,
-        ]);
-    }
-
-    public function deleteRole(int $id) {
-        Roles::find($id)->delete();
-    }
 
     public function getAll() {
         return Roles::all();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function whereUserIsAdmin() {
+        return Roles::where('id', '!=', '2')->get();
     }
 }

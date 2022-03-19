@@ -31,6 +31,14 @@ class User extends Authenticatable
         return $this->belongsTo(Roles::class, 'role_id', 'id');
     }
 
+    public function isSuperAdmin() {
+        return $this->role_id === 2;
+    }
+
+    public function isAdmin() {
+
+    }
+
     /**
      * The attributes that are mass assignable.
      *
