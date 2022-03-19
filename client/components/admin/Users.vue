@@ -1,50 +1,35 @@
 <template>
-  <div>
-    <el-row>
-      <el-col :span="24"><h3 class="titre">Les utilisateurs</h3></el-col>
-    </el-row>
-    <el-table
-      :data="users"
-      height="250"
-      style="width: 100%"
-      v-loading="loading">
-      <el-table-column
-        prop="name"
-        label="Nom"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="username"
-        label="Username"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="email"
-        label="Email">
-      </el-table-column>
-    </el-table>
+  <div class="users card-admin">
+    <div class="title">
+      Les utilisateurs
+    </div>
+    <List :data="users"/>
   </div>
 </template>
 
 <script>
+import { computed, useStore } from '@nuxtjs/composition-api'
+import { onMounted, ref } from '@vue/composition-api'
+import List from './components/List.vue'
 
 export default {
-  data:() => ({
-    users: [],
-    loading: false,
-  }),
-  mounted() {
-    this.getUsers()
+  components: {
+    List,
   },
-  methods: {
-    getUsers() {
-      this.loading = true
-      this.$axios.$get('/api/users')
-        .then((resp) => {
-          this.users = resp.users
-          this.loading = false
-        })
-        .catch((err) => {console.log(err)})
+  setup() {
+    const store = useStore()
+    const loading = ref(false)
+    const users = computed(() => store.state.user.users)
+
+    onMounted(() =>  {
+      if(users.value.length === 0){
+        store.dispatch('user/fetchAllUsers')
+      }
+    })
+
+    return {
+      users,
+      loading,
     }
   }
 }
@@ -53,5 +38,12 @@ export default {
 <style lang="css" scoped>
 .titre {
     text-align: center;
+}
+.table {
+  padding: 1rem;
+  width: 100%;
+}
+.users {
+  margin-top: 3rem;
 }
 </style>

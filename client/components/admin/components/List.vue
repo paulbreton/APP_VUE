@@ -1,16 +1,22 @@
 <template>
-  <div class="list" v-if="data.length">
-    <Item v-for="user in data" :key="user.id" :user="user" />
+  <div class="list" v-if="data.length" v-loading="!loading">
+    <Item v-for="user in data" :key="user.id" :user="user" @open-dialog="openDialog" />
+    <Dialog :show="showDialog" :user="userSelected" @close-dialog="closeDialog"/>
   </div>
   <div v-else class="no-data">
     Aucune donnée
   </div>
 </template>
 <script>
-import Item from './Item.vue'
+import { computed, ref } from '@vue/composition-api'
+import Item from './ItemUsers.vue'
+import Dialog from './DialogUpdateRole.vue'
+import { useStore } from '@nuxtjs/composition-api'
+
 export default {
   components: {
     Item,
+    Dialog,
   },
   props: {
     data: {
@@ -18,15 +24,40 @@ export default {
       required: true,
     },
   },
-  setup() {
+  setup(props) {
+    const store = useStore()
+    const loading = computed(() => props.data.length)
+    const showDialog = ref(false)
+
+    const userSelected = ref({})
+
+    const openDialog = (user) => {
+      showDialog.value = true
+      userSelected.value = user
+    }
     
-  },
+
+    const closeDialog = (params) => {
+      if(params) {
+        store.dispatch('user/update', params)
+      }
+      showDialog.value = false
+      userSelected.value = {}
+    }
+
+    return {
+      loading,
+      showDialog,
+      openDialog,
+      closeDialog,
+      userSelected,
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .no-data {
-  padding: 2rem;
   text-align: center;
   color: var(--text-secondary);
 }

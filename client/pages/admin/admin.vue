@@ -24,6 +24,7 @@ h1 {
     color: var(--text-secondary);
 }
 .container-admin {
+    margin-top: 3rem;
     display: flex;
     flex-direction: column;
     background-color: var(--background);
