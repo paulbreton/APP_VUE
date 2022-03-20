@@ -1,13 +1,12 @@
 <?php
 
+use App\Http\Controllers\API\GameController;
+use App\Http\Controllers\API\ParticipateController;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
-use App\Http\Controllers\API\FriendController;
 use App\Http\Controllers\API\Admin\RolesController;
-use App\Http\Controllers\TokenController;
-use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,5 +43,7 @@ Route::middleware(['auth:sanctum'])
      });
 
 Route::apiResource('roles', RolesController::class);
+Route::apiResource('game', GameController::class);
 
-
+Route::delete('game/{game}/participate/{user}', [ParticipateController::class, 'destroy']);
+Route::post('game/{game}/participate/{user}', [ParticipateController::class, 'store']);

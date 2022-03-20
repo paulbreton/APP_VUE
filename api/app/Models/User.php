@@ -31,11 +31,15 @@ class User extends Authenticatable
         return $this->belongsTo(Roles::class, 'role_id', 'id');
     }
 
+    public function games() {
+        $this->belongsToMany(Game::class, 'games_users');
+    }
+
     public function isSuperAdmin() {
         return $this->role_id === 2;
     }
     public function isAdmin() {
-        return $this->role_id === 1;
+        return $this->role_id === 1 || $this->role_id === 2;
     }
     /**
      * The attributes that are mass assignable.
