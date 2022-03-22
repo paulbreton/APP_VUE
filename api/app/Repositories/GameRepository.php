@@ -4,6 +4,7 @@ use App\Filters\GameFilters;
 use App\Models\Game;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class GameRepository extends BaseRepository
@@ -19,15 +20,17 @@ class GameRepository extends BaseRepository
      */
     public function store(GameFilters $filters)
     {
+        dump($this->user()->id);
         return Game::create([
             'title' => $filters->title,
             'description' => $filters->description,
-            'user_id' => $filters->organisateur,
+            'organisateur_id' => $filters->organisateur,
             'draft' => $filters->draft,
             'visibility' => $filters->visibility,
             'terrain' => $filters->terrain,
             'date' => $filters->date,
             'nb_players' => $filters->nb_players,
+            'creator_id' => 1,
         ]);
     }
 
@@ -44,8 +47,11 @@ class GameRepository extends BaseRepository
         if (isset($filters->draft)) {
             $query->where('draft', $filters->draft);
         }
+        if (isset($filters->createur)) {
+            $query->where('creator_id', $filters->createur);
+        }
 
-        return $query->get();
+        return $query->orderBy('date', 'desc')->get();
 
 
     }
@@ -78,6 +84,9 @@ class GameRepository extends BaseRepository
         }
         if (isset($filters->nb_players)) {
             $game->nb_players = $filters->nb_players;
+        }
+        if (isset($filters->organisateur)) {
+            $game->organisateur = $filters->organisateur;
         }
 
         return $game->save();

@@ -15,7 +15,8 @@ class GameCreateTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->integer('nb_players');
-            $table->foreignIdFor(User::class);
+            $table->unsignedBigInteger('organisateur_id')->unsigned();
+            $table->foreign('organisateur_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('terrain', ['MARAIS', 'PLOUZANE', 'LANDERNEAU']);
             $table->boolean('visibility');
             $table->boolean('draft');

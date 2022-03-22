@@ -23,5 +23,7 @@ class GameFilters extends DataTransferObject
     public $terrain;
     /** @var int */
     public $nb_players;
+    /** @var int */
+    public $createur;
 
 }
