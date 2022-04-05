@@ -39,7 +39,7 @@ export default {
   grid-auto-flow: row;
   background-color: var(--background);
   color: var(--text-primary);
-  border-radius: 5px;
+  border-radius: var(--radius-block);
   margin-bottom: 1rem;
   padding: 0.5rem;
   grid-template-areas:

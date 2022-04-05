@@ -40,10 +40,11 @@ Route::middleware(['auth:sanctum'])
              UserController::class,
              'update',
          ]);
+
+         Route::apiResource('roles', RolesController::class);
+         Route::apiResource('game', GameController::class);
+
+         Route::delete('game/{game}/participate/{user}', [ParticipateController::class, 'destroy']);
+         Route::post('game/{game}/participate/{user}', [ParticipateController::class, 'store']);
      });
 
-Route::apiResource('roles', RolesController::class);
-Route::apiResource('game', GameController::class);
-
-Route::delete('game/{game}/participate/{user}', [ParticipateController::class, 'destroy']);
-Route::post('game/{game}/participate/{user}', [ParticipateController::class, 'store']);

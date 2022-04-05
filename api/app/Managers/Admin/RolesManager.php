@@ -13,8 +13,8 @@ class RolesManager extends CommonManager
     }
 
     public function getAll() {
+        $res = [];
         $user = Auth::user();
-        dump($user);
         if($user->isSuperAdmin()){
             $res = $this->repository->getAll();
         } else if($user->isAdmin()) {

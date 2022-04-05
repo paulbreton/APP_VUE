@@ -4,8 +4,6 @@ use App\Filters\GameFilters;
 use App\Models\Game;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class GameRepository extends BaseRepository
 {
@@ -20,7 +18,6 @@ class GameRepository extends BaseRepository
      */
     public function store(GameFilters $filters)
     {
-        dump($this->user()->id);
         return Game::create([
             'title' => $filters->title,
             'description' => $filters->description,

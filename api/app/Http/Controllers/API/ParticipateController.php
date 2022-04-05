@@ -26,6 +26,11 @@ class ParticipateController extends AbstractApiController
         return $this->respondEmpty();
     }
 
+    /**
+     * @param Game $game
+     * @param User $user
+     * @return JsonResponse
+     */
     public function destroy(Game $game, User $user) {
 
         $game->users()->detach($user);

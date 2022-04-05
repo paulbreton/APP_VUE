@@ -32,7 +32,7 @@ export default {
   width: 100%;
   background-color: var(--background-secondary);
   color: var(--text-primary);
-  border-radius: 1rem;
+  border-radius: var(--radius-block);
 
   .content {
     display: flex;

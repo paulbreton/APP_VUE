@@ -4,11 +4,14 @@
             <span class="font-semibold text-2xl title">Association</span>
             <div class="space-x-2">
                 <template v-if="this.$auth.loggedIn">
-                    <NuxtLink to="/admin/admin">
+                    <NuxtLink to="/admin">
                         Admin 
                     </NuxtLink>
                     <NuxtLink to="/" exact>
                         Accueil
+                    </NuxtLink>
+                    <NuxtLink to="/game/" exact>
+                        Partie
                     </NuxtLink>
                     <a href="#" @click.prevent="logout">Déconnexion</a>
                 </template>
