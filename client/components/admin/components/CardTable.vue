@@ -2,7 +2,7 @@
   <div class="card-admin">
     <div class="title">{{ title }}</div>
     <div class="list">
-      <List :data="data"/>
+      <slot name="list"></slot>
     </div>
     <div class="actions">
       <slot></slot>

@@ -14,11 +14,12 @@ class Game extends Model
         'title',
         'description',
         'nb_players',
-        'user_id',
+        'organisateur_id',
         'draft',
         'visibility',
         'date',
         'terrain',
+        'creator_id'
     ];
 
     /**
@@ -32,6 +33,13 @@ class Game extends Model
      * @return HasOne
      */
     public function organisateur() {
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->hasOne(User::class, 'id', 'organisateur_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function createur() {
+        return $this->hasOne(User::class, 'id', 'creator_id');
     }
 }

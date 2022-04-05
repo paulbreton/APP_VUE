@@ -23,11 +23,13 @@ export default {
     css: [
         'element-ui/lib/theme-chalk/index.css',
         '~assets/css/style.scss',
+        '@fortawesome/fontawesome-svg-core/styles.css',
     ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
-        '@/plugins/element-ui'
+        '@/plugins/element-ui',
+        '@/plugins/fontawesome.js'
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
@@ -47,8 +49,28 @@ export default {
         '@nuxtjs/axios',
         '@nuxtjs/auth-next',
         '@nuxtjs/i18n',
+        '@nuxtjs/dayjs',
         // '@nuxtjs/composition-api/',
+        [
+            'nuxt-fontawesome', {
+              imports: [
+               {
+                 set: '@fortawesome/free-solid-svg-icons',
+                 icons: ['fas']
+               },
+               {
+                 set:'@fortawesome/free-brands-svg-icons',
+                 icons: ['fab']
+               }
+             ]
+            }
+        ]
+
     ],
+
+    /**
+     * 
+     */
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
     axios: {
@@ -84,14 +106,18 @@ export default {
         }
     },
 
+    // Optional
+    dayjs: {
+        locales: ['fr'],
+        defaultLocale: 'fr',
+        defaultTimeZone: 'Europe/Paris',
+        plugins: [
+        'utc', // import 'dayjs/plugin/utc'
+        'timezone', // import 'dayjs/plugin/timezone'
+        'isToday',
+        ] // Your Day.js plugin
+    },
+
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {},
-
-    fontawesome: {
-        icons: {
-            solid:true,
-            brands:true,
-            regular: true,
-        }
-    }
 }

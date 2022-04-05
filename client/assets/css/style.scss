@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-radius: 1rem;
+    border-radius: var(--radius-block);
     background-color: var(--background-secondary);
 
     width: 100%;
@@ -41,31 +41,21 @@
 }
 
 :root {
-    --positive: #f6ad55;
+    --positive: #FEAA00;
     --negative: red;
 
     --text-primary: #F7F4EF;
     --text-secondary: #FEAA00;
     --text-secondary-disabled: #2ADE69;
-    //--vert: #788402;
+    
     --background: #342628;
     --background-secondary: #4C3D3F;
 
-    --tablet: 800px;
-    --mobile: 900px;
+    --radius-block: 0.5rem;
 }
 
 body {
     background-color: var(--background);
-}
-
-.box {
-    padding: 2rem;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-    min-width: 500px;
-    margin: 2rem 0;
-    background-color: #fafafa;
 }
 
 .el-loading-spinner {
@@ -101,6 +91,35 @@ body {
     }
 }
 
+.item {
+    background-color: var(--background);
+    color: var(--text-primary);
+    border-radius: var(--radius-block);
+    margin: 1rem 0;
+    padding: 0.5rem;
+}
+
+.el-button {
+    &:hover,
+    &:focus {
+        outline: none;
+        color: var(--text-primary);
+    }    
+}
+.el-button--default {
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    border: none;
+}
+.el-button--primary {
+    background-color: var(--text-secondary);
+    border: none;
+
+    &.is-disabled {
+        background-color: var(--text-secondary-disabled);
+    }
+}
+
 /*  =================================================================
                         RESPONSIVE
     ================================================================= */
@@ -124,6 +143,10 @@ body {
     "list-user"
     "list-planned-game"
     "list-drafts-game";
+    margin-bottom: 6rem;
+}
+
+.container-admin {
     margin-bottom: 6rem;
 }
 
@@ -154,7 +177,7 @@ body {
     }
     .content-admin {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto 1fr 1fr;
+        grid-template-rows: auto;
         grid-auto-columns: 1fr;
         grid-template-areas:
         "stat stat"

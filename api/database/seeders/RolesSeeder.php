@@ -15,12 +15,11 @@ class RolesSeeder extends Seeder
     public function run()
     {
         DB::table('roles')
-          ->insert([
-              ['label' => 'AUCUN'],
-              ['label' => 'ADMIN'],
-              ['label' => 'SUPERADMIN'],
-              ['label' => 'MEMBER'],
-              ['label' => 'FREE'],
-          ]);
+            ->insert([
+                ['label' => 'FREE'],
+                ['label' => 'MEMBER'],
+                ['label' => 'ADMIN'],
+                ['label' => 'SUPERADMIN'],
+            ]);
     }
 }

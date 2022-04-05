@@ -3,13 +3,17 @@
         <!-- fixed nav -->
         <nav class="fixed bottom-0 inset-x-0 bg-blue-100 flex justify-between text-sm text-blue-900 uppercase font-mono">
             <template v-if="this.$auth.loggedIn">
-                <NuxtLink to="/admin/admin" class="w-full block py-5 px-3 text-center link">
+                <NuxtLink to="/admin" class="w-full block py-5 px-3 text-center link">
                     <font-awesome-icon icon="sliders" class="nav-icon" />
                     Admin 
                 </NuxtLink>
                 <NuxtLink to="/" exact class="w-full block py-5 px-3 text-center link">
                     <font-awesome-icon icon="house-chimney" class="nav-icon" />
                     Accueil
+                </NuxtLink>
+                <NuxtLink to="/game/" exact class="w-full block py-5 px-3 text-center link">
+                    <font-awesome-icon :icon="['fas', 'calendar-plus']" class="nav-icon"/>
+                    Partie
                 </NuxtLink>
                 <a href="#" @click.prevent="logout" class="w-full block py-5 px-3 text-center link"> 
                     <font-awesome-icon icon="arrow-right-from-bracket" class="nav-icon" />

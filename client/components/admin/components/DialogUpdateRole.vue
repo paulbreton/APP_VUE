@@ -56,7 +56,7 @@ export default {
 <style lang="scss">
 .el-dialog {
   background-color: var(--background);
-  border-radius: 1rem;
+  border-radius: var(--radius-block);
 
   .el-dialog__title {
     color: var(--text-secondary);

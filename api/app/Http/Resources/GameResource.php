@@ -16,6 +16,7 @@ class GameResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
             'terrain' => $this->terrain,
@@ -24,6 +25,7 @@ class GameResource extends JsonResource
             'visibility' => $this->visibility,
             'draft' => $this->draft,
             'organisateur' => UserResource::make($this->organisateur),
+            'createur' => UserResource::make($this->createur),
             'nb_players' => $this->nb_players,
         ];
     }
