@@ -9,7 +9,7 @@
 import Content from '@/components/admin/ContentAdmin.vue'
 
 export default {
-    middleware: 'auth',
+    middleware: 'admin',
     components: {
         Content,
     }

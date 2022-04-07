@@ -6,6 +6,7 @@
 <script>
 import Users from '@/components/admin/Users.vue'
 export default {
+  middleware: 'admin',
   components: {
     Users,
   },
