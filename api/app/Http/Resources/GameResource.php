@@ -25,7 +25,7 @@ class GameResource extends JsonResource
             'visibility' => $this->visibility,
             'draft' => $this->draft,
             'organisateur' => UserResource::make($this->organisateur),
-            'createur' => UserResource::make($this->createur),
+            'creator' => UserResource::make($this->creator),
             'nb_players' => $this->nb_players,
         ];
     }

@@ -24,6 +24,6 @@ class GameFilters extends DataTransferObject
     /** @var int */
     public $nb_players;
     /** @var int */
-    public $createur;
+    public $creator;
 
 }
