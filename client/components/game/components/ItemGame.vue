@@ -1,7 +1,7 @@
 <template>
-  <div class="item game">
+  <div class="item game" @click="openDialog">
     <div class="date">{{ day }} {{ date}}:</div>
-    <div class="status"><div class="badge" :class="{ negative: isPassed}"></div></div>
+    <div class="status"><div class="badge" :class="{ negative: !isVisible}"></div></div>
     <div class="terrain">{{ game.terrain }}</div>
     <div class="nbPlayer">{{ game.users.length }} / {{ game.nb_players }}</div>
     <div class="organisateur">Organisateur: {{ game.organisateur.pseudo }}</div>
@@ -9,6 +9,7 @@
 </template>
 <script>
 import { useContext } from '@nuxtjs/composition-api'
+import { computed } from '@vue/composition-api'
 import isToday from 'dayjs/plugin/isToday'
 export default {
   props: {
@@ -17,7 +18,7 @@ export default {
       required: true,
     }
   },
-  setup(props) {
+  setup(props, { emit }) {
     const context = useContext()
     // TODO: utiliser i18n !
     const dayList = [
@@ -39,11 +40,17 @@ export default {
 
     // TODO: CRON
     const isPassed = gameDate.isBefore(context.$dayjs())
+
+    const isVisible = computed(() => props.game.visibility)
+
+    const openDialog = () => emit('open-dialog', props.game)
     
     return {
       date,
       day,
-      isPassed
+      isPassed,
+      isVisible,
+      openDialog
     }
   }
 }
