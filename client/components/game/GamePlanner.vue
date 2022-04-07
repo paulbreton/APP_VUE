@@ -23,7 +23,7 @@
       </div>
       <div class="label-heure">Heure</div>
       <div class="heure">
-        <el-time-picker placeholder="Pick a time" v-model="heure" style="width: 100%;"></el-time-picker>
+        <el-time-picker placeholder="heure" v-model="heure" style="width: 100%;"></el-time-picker>
       </div>
       <div class="label-desc">Description</div>
       <div class="input-desc">
