@@ -4,7 +4,7 @@
             <CardStat />
         </div>
         <div class="list-user">
-            <CardTable title="Utilisateur inscrit" :data="users">
+            <CardTable title="Utilisateur inscrit">
                 <template v-slot:list>
                     <ListUser :data="users" />
                 </template>
@@ -16,22 +16,27 @@
             </CardTable>
         </div>
         <div class="list-planned-game">
-            <CardTable title="Parties planifiées" :data="[]">
+            <CardTable title="Parties planifiées">
                 <template v-slot:list>
-                    <ListGame :games="games" />
+                    <ListGame :games="gamesNoDraft" @update="updateGame" />
                 </template>
                 <template>                      
-                    <NuxtLink to="/game/new">
+                    <NuxtLink to="">
                         <el-button icon="el-icon-plus">Ajouter</el-button>
                     </NuxtLink>
                 </template>
             </CardTable>
         </div>
         <div class="list-drafts-game">
-            <CardTable title="Mes brouillons" :data="[]">
-                <NuxtLink to="game" exact>
-                    <el-button icon="el-icon-plus">Ajouter</el-button>
-                </NuxtLink>
+            <CardTable title="Mes brouillons">
+                <template v-slot:list>
+                    <ListGame :games="gamesMyDraft" />
+                </template>
+                <template>
+                    <NuxtLink to="game/new" exact>
+                        <el-button icon="el-icon-plus">Ajouter</el-button>
+                    </NuxtLink>
+                </template>                
             </CardTable>
         </div>
     </div>
@@ -63,15 +68,21 @@ export default defineComponent({
         onMounted(async () => {
             await store.dispatch('user/fetchAllUsers')
             await store.dispatch('roles/fetch')
-            await store.dispatch('game/fetch')
+            await store.dispatch('game/fetchMyDraft',  store.state.auth.user.data.id)
+            await store.dispatch('game/fetchGameNoDraft')
         })
 
         const users = computed(() => store.state.user.users)
-        const games = computed(() => store.state.game.games)
+        const gamesMyDraft = computed(() => store.state.game.gamesMyDraft)
+        const gamesNoDraft = computed(() => store.state.game.gamesNoDraft)
+
+        const updateGame = async (payload) => await store.dispatch('game/updateGame', { game: payload.game, visibility: payload.visibility }) 
 
         return {
             users,
-            games,
+            gamesMyDraft,
+            gamesNoDraft,
+            updateGame
         }
     },
 })

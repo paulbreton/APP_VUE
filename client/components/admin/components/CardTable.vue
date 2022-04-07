@@ -21,10 +21,6 @@ export default {
       type: String,
       required: true,
     },
-    data: {
-      type: Array,
-      required: true,
-    },
   },
 }
 </script>
