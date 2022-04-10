@@ -13,9 +13,9 @@ export default {
   },
   setup() {
     const store = useStore()
-    const games = computed(() => store.state.game.games)
+    const games = computed(() => store.state.game.gamesVisible)
 
-    onMounted(() => store.dispatch('game/fetch'))
+    onMounted(() => store.dispatch('game/fetchVisible'))
 
     return {
       games,

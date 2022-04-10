@@ -8,6 +8,7 @@
 <script>
 import GamePlanner from '@/components/game/GamePlanner'
 export default {
+  middleware: 'admin',
   components: {
     GamePlanner
   },

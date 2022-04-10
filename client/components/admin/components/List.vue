@@ -56,9 +56,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.no-data {
-  text-align: center;
-  color: var(--text-secondary);
-}
-</style>

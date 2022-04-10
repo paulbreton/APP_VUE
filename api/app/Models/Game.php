@@ -39,7 +39,7 @@ class Game extends Model
     /**
      * @return HasOne
      */
-    public function createur() {
+    public function creator() {
         return $this->hasOne(User::class, 'id', 'creator_id');
     }
 }

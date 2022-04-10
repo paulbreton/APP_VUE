@@ -26,7 +26,7 @@ class GameIndexRequest extends FormRequest
         return [
             'visibility' => 'boolean|sometimes|required',
             'draft' => 'boolean|sometimes|required',
-            'creator_id' => 'int|sometimes|required',
+            'creator' => 'int|sometimes|required',
         ];
     }
 }

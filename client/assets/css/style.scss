@@ -23,6 +23,10 @@
     .list {
         padding: 1rem;
     }
+    .no-data {
+        text-align: center;
+        color: var(--text-secondary);
+    }
     .actions {
         .el-button {
             background-color: var(--background-secondary);

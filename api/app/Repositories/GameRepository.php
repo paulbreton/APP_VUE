@@ -2,8 +2,10 @@
 
 use App\Filters\GameFilters;
 use App\Models\Game;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class GameRepository extends BaseRepository
 {
@@ -18,16 +20,25 @@ class GameRepository extends BaseRepository
      */
     public function store(GameFilters $filters)
     {
+        $query = $this->model->newQuery();
+        if (isset($filters->date)) {
+            $query->where('date', $filters->date);
+        }
+
+        if ($query->get()->first()) {
+            throw new Exception('Date already use');
+        }
+
         return Game::create([
             'title' => $filters->title,
             'description' => $filters->description,
             'organisateur_id' => $filters->organisateur,
-            'draft' => $filters->draft,
+            'draft' => !$filters->visibility,
             'visibility' => $filters->visibility,
             'terrain' => $filters->terrain,
             'date' => $filters->date,
             'nb_players' => $filters->nb_players,
-            'creator_id' => 1,
+            'creator_id' => Auth::id(),
         ]);
     }
 
@@ -44,8 +55,8 @@ class GameRepository extends BaseRepository
         if (isset($filters->draft)) {
             $query->where('draft', $filters->draft);
         }
-        if (isset($filters->createur)) {
-            $query->where('creator_id', $filters->createur);
+        if (isset($filters->creator)) {
+            $query->where('creator_id', $filters->creator);
         }
 
         return $query->orderBy('date', 'desc')->get();
