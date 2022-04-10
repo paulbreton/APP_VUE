@@ -20,17 +20,12 @@
                 <template v-slot:list>
                     <ListGame :games="gamesNoDraft" @update="updateGame" />
                 </template>
-                <template>                      
-                    <NuxtLink to="">
-                        <el-button icon="el-icon-plus">Ajouter</el-button>
-                    </NuxtLink>
-                </template>
             </CardTable>
         </div>
         <div class="list-drafts-game">
-            <CardTable title="Mes brouillons">
+            <CardTable title="Parties caché">
                 <template v-slot:list>
-                    <ListGame :games="gamesMyDraft" />
+                    <ListGame :games="gamesMyDraft" @update="updateGame"/>
                 </template>
                 <template>
                     <NuxtLink to="game/new" exact>
@@ -76,7 +71,9 @@ export default defineComponent({
         const gamesMyDraft = computed(() => store.state.game.gamesMyDraft)
         const gamesNoDraft = computed(() => store.state.game.gamesNoDraft)
 
-        const updateGame = async (payload) => await store.dispatch('game/updateGame', { game: payload.game, visibility: payload.visibility }) 
+        const updateGame = async (payload) => {
+            await store.dispatch('game/updateGame', { game: payload.game, visibility: payload.visibility })
+        }
 
         return {
             users,

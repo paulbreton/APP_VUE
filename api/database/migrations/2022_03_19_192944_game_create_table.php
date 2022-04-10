@@ -13,7 +13,7 @@ class GameCreateTable extends Migration
         Schema::create('game', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->integer('nb_players');
             $table->unsignedBigInteger('organisateur_id')->unsigned();
             $table->foreign('organisateur_id')->references('id')->on('users')->onDelete('cascade');

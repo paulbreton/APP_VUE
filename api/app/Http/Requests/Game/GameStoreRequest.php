@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Game;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class GameStoreRequest extends FormRequest
 {
@@ -26,12 +25,13 @@ class GameStoreRequest extends FormRequest
     {
         return [
             'title' => 'string|required',
-            'description' => 'string|sometimes|required',
+            'description' => 'nullable|string',
             'terrain' => 'string|required',
-            'nb_players' => 'int|gt:0|required',
+            'nb_players' => 'int|gt:0|sometimes|required',
             'visibility' => 'boolean|required',
-            'draft' => 'boolean|required',
+            'draft' => 'boolean|sometimes|required',
             'organisateur' => 'int|required',
+            'date' => 'required|date|after:tomorrow'
         ];
     }
 }

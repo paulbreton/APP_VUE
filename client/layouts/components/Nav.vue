@@ -40,6 +40,7 @@
 <style lang="scss" scoped>
 nav {
     background-color: var(--background-secondary);
+    z-index: 1;
 }
 .nav-desktop {
     padding: 1rem 0;
