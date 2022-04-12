@@ -1,6 +1,6 @@
 <template>
     <div class="text-md nav-desktop">
-        <nav class="fixed top-0 w-full padding-content flex justify-between items-center py-5">
+        <nav class="fixed top-0 w-full flex justify-between items-center py-5">
             <span class="font-semibold text-2xl title">Association</span>
             <div class="space-x-2">
                 <template v-if="this.$auth.loggedIn">
@@ -52,6 +52,23 @@ nav {
     }
     .title {
         color: var(--text-secondary);
+    }
+}
+//
+// TABLET
+//
+@media screen and (min-width: 1024px) {
+    nav {
+        padding: var(--padding-content-tablet);
+    }
+}
+
+//
+// DESKTOP
+//
+@media screen and (min-width: 1280px) {
+    nav {
+        padding: var(--padding-content-desktop);
     }
 }
 </style>

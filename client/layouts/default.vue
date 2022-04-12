@@ -1,7 +1,7 @@
 <template>
     <div>
         <div :class="{ 'is-auth-page': showNav }"><Nav /></div>
-        <div><Nuxt /></div>
+        <div class="content"><Nuxt /></div>
         <div :class="{ 'is-auth-page': showNav }"><NavMobile /></div>
     </div>
 </template>
@@ -34,5 +34,28 @@ import NavMobile from './components/NavMobile.vue'
 <style lang="scss" scoped>
 .is-auth-page {
     display: none;
+}
+.content {
+    padding: var(--padding-content-mobile);
+}
+
+//
+// TABLET
+//
+@media screen and (min-width: 1024px) {
+    .content {
+        padding: var(--padding-content-tablet);
+        margin-top: 4rem;
+    }
+}
+
+//
+// DESKTOP
+//
+@media screen and (min-width: 1280px) {
+    .content {
+        padding: var(--padding-content-desktop);
+        margin-top: 4rem;
+    }
 }
 </style>

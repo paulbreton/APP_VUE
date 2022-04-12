@@ -2,7 +2,7 @@ export const state = {
   gamesVisible: [],
   gamesMyDraft: [],
   gamesNoDraft: [],
-  game: null
+  game: {}
 }
 
 export const mutations = {
@@ -43,5 +43,14 @@ export const actions = {
   },
   async storeGame(_, payload) {
     await this.$axios.post('api/game', payload)
+  },
+
+  async participateGame({ dispatch }, payload) {
+    await this.$axios.post(`api/game/${payload.gameId}/participate/${payload.userId}`)
+    dispatch('fetchById', payload.gameId)
+  },
+  async quiteGame({ dispatch }, payload) {
+    await this.$axios.delete(`api/game/${payload.gameId}/participate/${payload.userId}`)
+    dispatch('fetchById', payload.gameId)
   }
 }
