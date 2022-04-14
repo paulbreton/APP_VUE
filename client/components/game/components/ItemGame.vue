@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import { useContext } from '@nuxtjs/composition-api'
+import { useContext, useRouter } from '@nuxtjs/composition-api'
 import { computed } from '@vue/composition-api'
 import isToday from 'dayjs/plugin/isToday'
 export default {
@@ -20,6 +20,7 @@ export default {
   },
   setup(props, { emit }) {
     const context = useContext()
+    const router = useRouter()
     // TODO: utiliser i18n !
     const dayList = [
       'Dimanche',
@@ -43,7 +44,13 @@ export default {
 
     const isVisible = computed(() => props.game.visibility)
 
-    const openDialog = () => emit('open-dialog', props.game)
+    const openDialog = () => {
+      if (context.route.value.name === 'admin') {
+        emit('open-dialog', props.game)
+      } else {
+        router.push(`${props.game.id}`)
+      }
+    }
     
     return {
       date,

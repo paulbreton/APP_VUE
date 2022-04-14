@@ -11,7 +11,6 @@ class UserRepository extends BaseRepository
     }
     
     public function getAll() {
-        //return User::where('id', '!=', request()->user()->id)->get();
         return User::where('id', '!=', Auth::id())->get();
     }
 

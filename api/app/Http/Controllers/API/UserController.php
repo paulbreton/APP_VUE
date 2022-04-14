@@ -21,7 +21,6 @@ class UserController extends AbstractApiController
      * @return Response
      */
     public function index(UserManager $userManager) {
-
         return response(UserResource::collection($userManager->getAll()));
     }
     /**

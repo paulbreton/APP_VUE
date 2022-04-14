@@ -7,6 +7,7 @@ use App\Models\Game;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ParticipateController extends AbstractApiController
 {
@@ -17,12 +18,11 @@ class ParticipateController extends AbstractApiController
      * @throws Exception
      */
     public function store(Game $game, User $user) {
-        try {
-            $game->users()->attach($user);
-        } catch (Exception $exception) {
-            throw $exception;
+        
+        if ($game->users()->count() >= $game->nb_players) {
+            throw new NotFoundHttpException("Game is full");
         }
-
+        $game->users()->attach($user);
         return $this->respondEmpty();
     }
 

@@ -55,6 +55,7 @@ export default {
 .d-body {
   display: flex;
   justify-content: space-between;
+  padding: 1rem;
 }
 </style>
 <style lang="scss">

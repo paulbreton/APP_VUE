@@ -56,6 +56,10 @@
     --background-secondary: #4C3D3F;
 
     --radius-block: 0.5rem;
+
+    --padding-content-mobile: 1rem 1rem;
+    --padding-content-tablet: 1rem 6rem;;
+    --padding-content-desktop: 1rem 20rem;
 }
 
 body {
@@ -131,9 +135,9 @@ body {
 //
 // MOBILE
 //
-.padding-content {
+/*.padding-content {
     padding: 1rem 2rem;
-}
+}*/
 .nav-mobile {
     display: block;
 }
@@ -170,9 +174,9 @@ body {
 // TABLET
 //
 @media screen and (min-width: 1024px) {
-    .padding-content {
+    /*.padding-content {
         padding: 1rem 6rem;
-    }
+    }*/
     .nav-mobile {
         display: none;
     }
@@ -195,9 +199,9 @@ body {
 // DESKTOP
 //
 @media screen and (min-width: 1280px) {
-    .padding-content {
+    /*.padding-content {
         padding: 1rem 20rem;
-    }
+    }*/
     .nav-desktop {
         display: block;
     }

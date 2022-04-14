@@ -1,10 +1,14 @@
 export const state = () => ({
   users: [],
+  user: null
 })
 
 export const mutations = {
   setUsers (state, users) {
     state.users = users
+  },
+  setUser (state, user) {
+    state.user = user
   }
 }
 
@@ -16,6 +20,9 @@ export const actions = {
   async fetchAllUsers({ commit }) {
     const users = await this.$axios.$get('api/users')
     commit('setUsers', users)
+  },
+  async fetchUser({ commit }, user) {
+    commit('setUser', user)
   },
   async delete({ dispatch }, id) {
     await this.$axios.$delete(`api/user/${id}`)
