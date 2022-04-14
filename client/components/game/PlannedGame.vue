@@ -5,8 +5,8 @@
   </div>  
 </template>
 <script>
-import GameResume from './components/GameResume.vue';
-import GameAction from './components/GameAction.vue';
+import GameResume from './components/GameResume.vue'
+import GameAction from './components/GameAction.vue'
 import { computed, useContext } from '@nuxtjs/composition-api'
 export default {
   components: {

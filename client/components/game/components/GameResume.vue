@@ -130,14 +130,14 @@ export default {
 // TABLET & desktop
 @media screen and (min-width: 1024px) {
   .game-info-grid {
-  display: grid; 
-  grid-auto-columns: 1fr; 
-  grid-template-columns: auto 1fr 1fr; 
-  grid-template-rows: 1fr 1fr; 
-  gap: 1rem; 
-  grid-template-areas: 
-    "adresse scenario scenario"
-    "description scenario scenario"; 
-}
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: auto 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+    grid-template-areas:
+      "adresse scenario scenario"
+      "description scenario scenario";
+  }
 }
 </style>

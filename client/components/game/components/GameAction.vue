@@ -1,14 +1,19 @@
 <template>
   <div class="action">
     <div class="participate btn" @click="iParticipate">{{ messageBtnParticipe }}</div>
-    <div class="list-player btn">Liste des joueurs</div>
+    <div class="list-player btn" @click="openList">Liste des joueurs</div>
     <div class="security-rule btn">Règle de sécurité</div>
+    <DialogListPlayers :show="showList" @close-dialog="closeList"/>
   </div>
 </template>
 <script>
-import { computed, useStore } from '@nuxtjs/composition-api'
+import { computed, useStore, ref } from '@nuxtjs/composition-api'
+import DialogListPlayers from './DialogListPlayers.vue'
 import { error, success, commonError } from '@/assets/utils/Notification'
 export default {
+  components: {
+    DialogListPlayers
+  },
   props: {
     game: {
       type: Object,
@@ -18,7 +23,9 @@ export default {
   setup(props) {
     const store = useStore()
 
-    const userId = store.state.auth.user.data.id
+    const showList = ref(false)
+
+    const userId = store.state.user.user.data.id
 
     const registerInGame = computed(() => props.game.users ? props.game.users.map((player) => player.id).includes(userId):false)
 
@@ -46,10 +53,16 @@ export default {
       }
     }
 
+    const openList = () => showList.value = true
+    const closeList = () => showList.value = false
+
     return {
       iParticipate,
       registerInGame,
       messageBtnParticipe,
+      openList,
+      closeList,
+      showList
     }
   }
 }

@@ -3,7 +3,7 @@
         <!-- fixed nav -->
         <nav class="fixed bottom-0 inset-x-0 bg-blue-100 flex justify-between text-sm text-blue-900 uppercase font-mono">
             <template v-if="this.$auth.loggedIn">
-                <NuxtLink to="/admin" class="w-full block py-5 px-3 text-center link">
+                <NuxtLink to="/admin" v-if="hasRole" class="w-full block py-5 px-3 text-center link">
                     <font-awesome-icon icon="sliders" class="nav-icon" />
                     Admin 
                 </NuxtLink>
@@ -36,6 +36,11 @@
 
 <script>
     export default {
+        data() {
+            return {
+                hasRole: this.$store.getters['user/isAdmin']
+            }
+        },
         methods: {
             logout() {
                 this.$auth.logout()
