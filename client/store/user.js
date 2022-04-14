@@ -14,9 +14,6 @@ export const mutations = {
 
 export const getters = {
   get: (state) => state.user,
-
-  isAdmin: (state) => state.data ? state.data.user.role.id > 2 : false,
-  isSuperadmin: (state) => state.data ? state.data.user.role.id === 4 : false,
 }
 
 export const actions = {

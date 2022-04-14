@@ -38,7 +38,7 @@
     export default {
         data() {
             return {
-                hasRole: this.$store.getters['user/isAdmin']
+                hasRole: this.$auth.user ? this.$auth.user.data.role.id > 2 : false
             }
         },
         methods: {

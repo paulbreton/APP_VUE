@@ -2,17 +2,20 @@
   <div class="action">
     <div class="participate btn" @click="iParticipate">{{ messageBtnParticipe }}</div>
     <div class="list-player btn" @click="openList">Liste des joueurs</div>
-    <div class="security-rule btn">Règle de sécurité</div>
+    <div class="security-rule btn" @click="openRules">Règle de sécurité</div>
     <DialogListPlayers :show="showList" @close-dialog="closeList"/>
+    <DialogSecurityRules :show="showRules" @close-dialog="closeRules"/>
   </div>
 </template>
 <script>
 import { computed, useStore, ref } from '@nuxtjs/composition-api'
 import DialogListPlayers from './DialogListPlayers.vue'
+import DialogSecurityRules from './DialogSecurityRules.vue'
 import { error, success, commonError } from '@/assets/utils/Notification'
 export default {
   components: {
-    DialogListPlayers
+    DialogListPlayers,
+    DialogSecurityRules
   },
   props: {
     game: {
@@ -24,24 +27,25 @@ export default {
     const store = useStore()
 
     const showList = ref(false)
+    const showRules = ref(false)
 
-    const userId = store.state.user.user.data.id
+    const userId = computed(() => store.state.auth.user ? store.state.auth.user.data.id: -1)
 
-    const registerInGame = computed(() => props.game.users ? props.game.users.map((player) => player.id).includes(userId):false)
+    const registerInGame = computed(() => props.game.users ? props.game.users.map((player) => player.id).includes(userId.value):false)
 
     const messageBtnParticipe = computed(() => registerInGame.value ? 'Je ne participe plus !' : 'Je participe !')
 
     const iParticipate = async () => {
       if(registerInGame.value) {
         try {
-          await store.dispatch('game/quiteGame', {gameId: props.game.id, userId: userId })
+          await store.dispatch('game/quiteGame', {gameId: props.game.id, userId: userId.value })
           success('Desinscription à la partie confirmée')
         } catch (e) {     
           commonError()
         }
       } else {
         try {
-          await store.dispatch('game/participateGame', {gameId: props.game.id, userId: userId })
+          await store.dispatch('game/participateGame', {gameId: props.game.id, userId: userId.value })
           success('Inscription à la partie confirmée')
         } catch (e) {
           if(e.response.data.message === 'Game is full') {
@@ -55,6 +59,9 @@ export default {
 
     const openList = () => showList.value = true
     const closeList = () => showList.value = false
+    
+    const openRules = () => showRules.value = true
+    const closeRules = () => showRules.value = false
 
     return {
       iParticipate,
@@ -62,7 +69,11 @@ export default {
       messageBtnParticipe,
       openList,
       closeList,
-      showList
+      showList,
+      openRules,
+      closeRules,
+      showRules,
+      userId
     }
   }
 }
