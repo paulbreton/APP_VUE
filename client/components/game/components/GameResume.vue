@@ -1,6 +1,6 @@
 <template>
   <div class="game-info">
-    <div class="title">{{ game.title }}</div>
+    <div class="title">{{ $dayjs(game.date).format('DD/MM') }} - {{ game.title }}</div>
     <div class="game-info-grid">
       <div class="description">
         <div class="block-info">

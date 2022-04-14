@@ -3,7 +3,7 @@
 		<nav class="fixed top-0 w-full flex justify-between items-center py-5">
 			<span class="font-semibold text-2xl title">Association</span>
 			<div class="space-x-2">
-				<template v-if="this.$store.state.user.loggedIn">
+				<template v-if="this.$auth.loggedIn">
 					<NuxtLink to="/admin" v-if="hasRole">
 							Admin 
 					</NuxtLink>
@@ -30,16 +30,16 @@
 
 <script>
 export default {
+	data() {
+		return {
+			hasRole: this.$auth.user ? this.$auth.user.data.role.id > 2 : false
+		}
+	},
 	methods: {
 		logout() {
 			this.$auth.logout()
 		},
 	},
-	computed: {
-    hasRole: function () {
-      return this.$auth.user ? this.$auth.user.data.role.id > 2 : false
-    }
-  }
 }
 </script>
 <style lang="scss" scoped>
