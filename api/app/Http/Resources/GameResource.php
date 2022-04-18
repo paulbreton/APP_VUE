@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class GameResource extends JsonResource
@@ -27,6 +26,7 @@ class GameResource extends JsonResource
             'organisateur' => UserResource::make($this->organisateur),
             'creator' => UserResource::make($this->creator),
             'nb_players' => $this->nb_players,
+            'comments' => CommentResource::collection($this->comments),
         ];
     }
 }

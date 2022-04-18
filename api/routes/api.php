@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\GameController;
 use App\Http\Controllers\API\ParticipateController;
 use App\Http\Resources\UserResource;
@@ -46,5 +47,7 @@ Route::middleware(['auth:sanctum'])
 
          Route::delete('game/{game}/participate/{user}', [ParticipateController::class, 'destroy']);
          Route::post('game/{game}/participate/{user}', [ParticipateController::class, 'store']);
+
+         Route::post('game/{game}/comment', [CommentController::class, 'store']);
      });
 

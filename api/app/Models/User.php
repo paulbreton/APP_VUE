@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Roles;
 use App\Traits\Friendable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,6 +32,11 @@ class User extends Authenticatable
 
     public function games() {
         $this->belongsToMany(Game::class, 'games_users');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function isSuperAdmin() {
