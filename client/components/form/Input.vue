@@ -2,6 +2,8 @@
     <el-input 
         :placeholder="placeholder"
         @input="handleInput"
+        @blur="handleBlur"
+        @focus="handleFocus"
         :value="value"
         :show-password="password"
         :class="{success : isValid && value !=='', wrong: isValid === false && value !==''}"
@@ -39,8 +41,14 @@ export default defineComponent({
             emit('handle-input', value)
         }
 
+        const handleBlur = () => emit('handle-blur')
+
+        const handleFocus = () => emit('handle-focus')
+
         return {
             handleInput,
+            handleBlur,
+            handleFocus
         }
     },
 })
