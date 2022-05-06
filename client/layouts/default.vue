@@ -35,8 +35,13 @@ import NavMobile from './components/NavMobile.vue'
 .is-auth-page {
     display: none;
 }
+
+//
+// MOBILE
+//
 .content {
     padding: var(--padding-content-mobile);
+    margin-bottom: 5rem;
 }
 
 //

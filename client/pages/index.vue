@@ -7,18 +7,12 @@
 </template>
 
 <script>
-import { onMounted, useContext, watch } from '@nuxtjs/composition-api'
+import { useContext } from '@nuxtjs/composition-api'
 
 export default {
     middleware: 'guest',
     setup() {
         const context = useContext()
-
-        onMounted(() => {
-            context.$pusher.subscribe('comment').bind('SendComment', function(data) {
-                alert(JSON.stringify(data));
-            })
-        })
         
         return {
             context

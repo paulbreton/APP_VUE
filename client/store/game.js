@@ -52,5 +52,9 @@ export const actions = {
   async quiteGame({ dispatch }, payload) {
     await this.$axios.delete(`api/game/${payload.gameId}/participate/${payload.userId}`)
     dispatch('fetchById', payload.gameId)
+  },
+
+  async postComment({ dispatch }, payload) {
+    await this.$axios.post(`api/game/${payload.gameId}/comment`, { 'content': payload.content })
   }
 }
