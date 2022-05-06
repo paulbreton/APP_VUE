@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\SendComment;
 use App\Filters\CommentFilters;
 use App\Http\Controllers\AbstractApiController;
 use App\Http\Requests\Comment\CommentStoreRequest;
 use App\Managers\CommentManager;
 use App\Models\Game;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends AbstractApiController
@@ -31,6 +31,8 @@ class CommentController extends AbstractApiController
         $filters->user_id = Auth::user()->id;
 
         $this->manager->newComment($filters);
+
+        event(new SendComment($filters->game_id, $filters->content));
 
         return $this->respondEmpty();
     }
