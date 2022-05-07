@@ -15,9 +15,10 @@ export default {
 
     onMounted(async () => {
       await store.dispatch('game/fetchById', params.value.id)
+      await store.dispatch('game/getComments', params.value.id)
 
-      $pusher.subscribe('comment.'+params.value.id).bind('SendComment', () => {
-        store.dispatch('game/fetchById', params.value.id)
+      $pusher.subscribe('comment.'+params.value.id).bind('SendComment', async () => {
+        await store.dispatch('game/getComments', params.value.id)
       })
     })
 

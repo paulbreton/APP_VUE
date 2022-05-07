@@ -2,7 +2,8 @@ export const state = {
   gamesVisible: [],
   gamesMyDraft: [],
   gamesNoDraft: [],
-  game: {}
+  game: {},
+  comments: [],
 }
 
 export const mutations = {
@@ -17,6 +18,10 @@ export const mutations = {
   },
   setGame(state, game) {
     state.game = game
+  },
+  setComments(state, comments) {
+    comments.data = comments.data.reverse() 
+    state.comments = comments
   },
 }
 
@@ -33,6 +38,7 @@ export const actions = {
     const game = await  this.$axios.$get('/api/game', { params: { draft: 0 } })
     commit('setGamesNoDraft', game.payload)
   },
+
   async fetchById({ commit }, id) {
     const game = await this.$axios.get(`api/game/${id}`)
     commit('setGame', game.data.payload)
@@ -54,7 +60,15 @@ export const actions = {
     dispatch('fetchById', payload.gameId)
   },
 
-  async postComment({ dispatch }, payload) {
+  async postComment(_, payload) {
     await this.$axios.post(`api/game/${payload.gameId}/comment`, { 'content': payload.content })
+  },
+  async getComments({ commit }, id) {
+    const comments = await this.$axios.get(`api/game/${id}/comment`)
+    commit('setComments', comments.data)
+  },
+  async changePageComments({ commit }, url) {
+    const comments = await this.$axios.get(url)
+    commit('setComments', comments.data)
   }
 }

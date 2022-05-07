@@ -1,7 +1,10 @@
 <template>
   <div class="send">
-    <Input placeholder="Envoyer une question" :value.sync="comment" @handle-focus="progressOn" @handle-blur="progressOff" @handle-input="handleComment" @handle-enter="send" />
-    <font-awesome-icon icon="fa-solid fa-paper-plane" class="icon-send" :class="{ disabled: comment === '' }" @click="send" />
+    <div>Pose ta question</div>
+    <div class="input">
+      <Input placeholder="Envoyer une question" :value.sync="comment" @handle-focus="progressOn" @handle-blur="progressOff" @handle-input="handleComment" @handle-enter="send" />
+      <font-awesome-icon icon="fa-solid fa-paper-plane" class="icon-send" :class="{ disabled: comment === '' }" @click="send" />
+    </div>
   </div>
 </template>
 <script>
@@ -14,7 +17,6 @@ export default {
     Input
   },
   setup(props) {
-    const context = useContext()
     const store = useStore()
     const comment = ref('')
     const handleComment = (value) => {
@@ -48,16 +50,20 @@ export default {
 </script>
 <style lang="scss" scoped>
 .send {
-  margin-top: 2rem;
-  display: flex;
-  align-items: center;
-  .icon-send {
-    color: var(--text-secondary);
-    padding: 1rem 0 1rem 1rem;
-    cursor: pointer;
+  margin-top: 4rem;
+  color: var(--text-secondary);
+  .input {
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    .icon-send {
+      color: var(--text-secondary);
+      padding: 1rem 0 1rem 1rem;
+      cursor: pointer;
 
-    &.disabled {
-      color: var(--background-secondary);
+      &.disabled {
+        color: var(--background-secondary);
+      }
     }
   }
 }

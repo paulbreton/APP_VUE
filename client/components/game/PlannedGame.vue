@@ -5,7 +5,7 @@
       <GameAction :game="game" />
     </div>
     <div class="comments">
-      <GameComments :comments="game.comments" />
+      <GameComments :comments="comments" />
     </div>
     <SendComment />
   </div>
@@ -27,9 +27,11 @@ export default {
     const { store } = useContext()
        
     const game = computed(() => store.state.game.game)
+    const comments = computed(() => store.state.game.comments)
 
     return {
-      game
+      game,
+      comments
     }
   },
 }
