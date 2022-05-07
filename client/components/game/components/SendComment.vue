@@ -1,6 +1,6 @@
 <template>
   <div class="send">
-    <Input placeholder="Envoyer une question" :value.sync="comment" @handle-focus="progressOn" @handle-blur="progressOff" @handle-input="handleComment" @keyup.enter="send()"/>
+    <Input placeholder="Envoyer une question" :value.sync="comment" @handle-focus="progressOn" @handle-blur="progressOff" @handle-input="handleComment" @handle-enter="send" />
     <font-awesome-icon icon="fa-solid fa-paper-plane" class="icon-send" :class="{ disabled: comment === '' }" @click="send" />
   </div>
 </template>
@@ -22,8 +22,10 @@ export default {
     }
 
     const send = async () => {
-      await store.dispatch('game/postComment', { gameId: store.state.game.game.id, content: comment.value })
-      comment.value = ''
+      if(comment.value) {
+        await store.dispatch('game/postComment', { gameId: store.state.game.game.id, content: comment.value })
+        comment.value = ''
+      }
     }
 
     const progressOn = () => {

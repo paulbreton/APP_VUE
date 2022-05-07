@@ -9,11 +9,17 @@ export default {
     PlannedGame
   },
   setup() {
-    const { params, store } = useContext()
+    const { params, store, $pusher } = useContext()
     const game = computed(() => store.state.game.game)
     const loading = computed(() => Object.keys(game.value).length === 0)
 
-    onMounted(async () => await store.dispatch('game/fetchById', params.value.id))
+    onMounted(async () => {
+      await store.dispatch('game/fetchById', params.value.id)
+
+      $pusher.subscribe('comment.'+params.value.id).bind('SendComment', () => {
+        store.dispatch('game/fetchById', params.value.id)
+      })
+    })
 
     return {
       loading
