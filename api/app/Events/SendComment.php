@@ -40,7 +40,7 @@ class SendComment implements ShouldBroadcast
     public function broadcastOn()
     {
         //return new Channel('App.Game.' . $this->game_id);
-        return new Channel('comment');
+        return new Channel('comment.'.$this->game_id);
     }
 
     /**
