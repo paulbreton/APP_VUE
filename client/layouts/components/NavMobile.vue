@@ -35,18 +35,21 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                hasRole: this.$auth.user ? this.$auth.user.data.role.id > 2 : false
-            }
-        },
-        methods: {
-            logout() {
-                this.$auth.logout()
-            }
-        }
-    }
+import { computed, useContext } from '@nuxtjs/composition-api'
+export default {
+	setup() {
+		const context = useContext()
+
+		const hasRole = computed(() => context.$auth.user ? context.$auth.user.data.role.id > 2 : false)
+
+		const logout = () => context.$auth.logout()
+
+		return {
+			hasRole,
+			logout
+		}
+	}
+}
 </script>
 <style lang="scss" scoped>
 nav {
