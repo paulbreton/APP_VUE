@@ -49,5 +49,6 @@ Route::middleware(['auth:sanctum'])
          Route::post('game/{game}/participate/{user}', [ParticipateController::class, 'store']);
 
          Route::post('game/{game}/comment', [CommentController::class, 'store']);
+         Route::get('game/{game}/comment', [CommentController::class, 'index']);
      });
 

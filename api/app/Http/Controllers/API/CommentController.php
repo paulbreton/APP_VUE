@@ -6,7 +6,9 @@ use App\Events\SendComment;
 use App\Filters\CommentFilters;
 use App\Http\Controllers\AbstractApiController;
 use App\Http\Requests\Comment\CommentStoreRequest;
+use App\Http\Resources\CommentResource;
 use App\Managers\CommentManager;
+use App\Models\Comment;
 use App\Models\Game;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +19,14 @@ class CommentController extends AbstractApiController
 
     public function __construct(CommentManager $commentManager) {
         $this->manager = $commentManager;
+    }
+
+    public function index(Game $game) {
+        $comments = Comment::where('game_id', '=', $game->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        return CommentResource::collection($comments);
     }
 
     /**

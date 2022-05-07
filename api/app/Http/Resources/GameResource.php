@@ -26,7 +26,6 @@ class GameResource extends JsonResource
             'organisateur' => UserResource::make($this->organisateur),
             'creator' => UserResource::make($this->creator),
             'nb_players' => $this->nb_players,
-            'comments' => CommentResource::collection($this->comments),
         ];
     }
 }
