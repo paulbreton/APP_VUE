@@ -29,17 +29,20 @@
 </template>
 
 <script>
+import { computed, useContext } from '@nuxtjs/composition-api'
 export default {
-	data() {
+	setup() {
+		const context = useContext()
+
+		const hasRole = computed(() => context.$auth.user ? context.$auth.user.data.role.id > 2 : false)
+
+		const logout = () => context.$auth.logout()
+
 		return {
-			hasRole: this.$auth.user ? this.$auth.user.data.role.id > 2 : false
+			hasRole,
+			logout
 		}
-	},
-	methods: {
-		logout() {
-			this.$auth.logout()
-		},
-	},
+	}
 }
 </script>
 <style lang="scss" scoped>

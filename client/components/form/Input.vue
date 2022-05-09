@@ -2,16 +2,19 @@
     <el-input 
         :placeholder="placeholder"
         @input="handleInput"
+        @blur="handleBlur"
+        @focus="handleFocus"
+        @keyup.enter.native="handleEnter"
         :value="value"
         :show-password="password"
         :class="{success : isValid && value !=='', wrong: isValid === false && value !==''}"
     >
-        <i slot="suffix" class="el-input__icon" :class="{ 'el-icon-check': isValid, 'el-icon-close': !isValid }" v-if="value"></i>
+        <!--<i slot="suffix" class="el-input__icon" :class="{ 'el-icon-check': isValid, 'el-icon-close': !isValid, 'show': value && !require }"></i>-->
     </el-input>
 </template>
 
 <script>
-import { defineComponent, ref, emit, computed } from '@vue/composition-api'
+import { defineComponent } from '@vue/composition-api'
 
 export default defineComponent({
     props: {
@@ -28,6 +31,11 @@ export default defineComponent({
             type: Boolean,
             require: false
         },
+        require: {
+            type: Boolean,
+            require: false,
+            default: false
+        },
         placeholder: {
             type: String,
             default: '',
@@ -39,8 +47,17 @@ export default defineComponent({
             emit('handle-input', value)
         }
 
+        const handleBlur = () => emit('handle-blur')
+
+        const handleFocus = () => emit('handle-focus')
+
+        const handleEnter = () => emit('handle-enter')
+
         return {
             handleInput,
+            handleBlur,
+            handleFocus,
+            handleEnter
         }
     },
 })

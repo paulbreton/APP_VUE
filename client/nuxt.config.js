@@ -29,7 +29,8 @@ export default {
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
         '@/plugins/element-ui',
-        '@/plugins/fontawesome.js'
+        '@/plugins/fontawesome.js',
+        '@/plugins/pusher.js',
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,6 +42,11 @@ export default {
         '@nuxtjs/tailwindcss',
         '@nuxtjs/composition-api/module',
         '@nuxtjs/fontawesome',
+        ['@nuxtjs/laravel-echo', {
+            broadcaster: 'pusher',
+            host: 'http://localhost:6001',
+            key: '965ef84a79a7ba314ef3',
+        }],
     ],
 
     // Modules: https://go.nuxtjs.dev/config-modules
@@ -50,23 +56,28 @@ export default {
         '@nuxtjs/auth-next',
         '@nuxtjs/i18n',
         '@nuxtjs/dayjs',
-        // '@nuxtjs/composition-api/',
         [
             'nuxt-fontawesome', {
               imports: [
                {
-                 set: '@fortawesome/free-solid-svg-icons',
-                 icons: ['fas']
+                    set: '@fortawesome/free-solid-svg-icons',
+                    icons: ['fas']
                },
                {
-                 set:'@fortawesome/free-brands-svg-icons',
-                 icons: ['fab']
+                    set:'@fortawesome/free-brands-svg-icons',
+                    icons: ['fab']
                }
              ]
             }
         ]
 
     ],
+
+    echo: {
+        authModule: false,
+        connectOnLogin: true,
+        disconnectOnLogout: true
+    },
 
     /**
      * 

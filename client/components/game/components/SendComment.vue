@@ -1,0 +1,76 @@
+<template>
+  <div class="send">
+    <div class="title">Pose ta question</div>
+    <div class="input">
+      <Input placeholder="Envoyer une question" :value.sync="comment" @handle-focus="progressOn" @handle-blur="progressOff" @handle-input="handleComment" @handle-enter="send" />
+      <font-awesome-icon icon="fa-solid fa-paper-plane" class="icon-send" :class="{ disabled: comment === '' }" @click="send" />
+    </div>
+  </div>
+</template>
+<script>
+import Input from '@/components/form/Input'
+import { ref } from '@vue/composition-api'
+import { useStore } from '@nuxtjs/composition-api'
+
+export default {
+  components: {
+    Input
+  },
+  setup() {
+    const store = useStore()
+    const comment = ref('')
+    const handleComment = (value) => {
+      comment.value = value
+    }
+
+    const send = async () => {
+      if(comment.value) {
+        await store.dispatch('game/postComment', { gameId: store.state.game.game.id, content: comment.value })
+        comment.value = ''
+      }
+    }
+
+    const progressOn = () => {
+      console.log('is focus')
+    }
+
+    const progressOff = () => {
+      console.log('is blur')
+    }
+
+    return {
+      send,
+      comment,
+      handleComment,
+      progressOn,
+      progressOff
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.send {
+  margin-top: 4rem;
+  color: var(--text-secondary);
+  .title {
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-align: center;
+  }
+  .input {
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    .icon-send {
+      color: var(--text-secondary);
+      padding: 1rem 0 1rem 1rem;
+      cursor: pointer;
+
+      &.disabled {
+        color: var(--background-secondary);
+      }
+    }
+  }
+}
+</style>
