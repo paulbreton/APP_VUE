@@ -4,7 +4,7 @@
     <div class="list">
       <Comment v-for="comment in comments.data" :key="comment.id" :comment="comment" />
     </div>
-    <div class="pagination">
+    <div class="pagination" v-if="hasComments">
       <div>
         <el-button @click="first" type="text" :disabled="hasPrevious" icon="el-icon-d-arrow-left"></el-button>
         <el-button @click="previous" type="text" :disabled="hasPrevious" icon="el-icon-arrow-left">Précédent</el-button>
@@ -14,6 +14,9 @@
         <el-button @click="next" type="text" :disabled="hasNext">Suivant <i class="el-icon-arrow-right"></i></el-button>
         <el-button @click="last" type="text" :disabled="hasNext" icon="el-icon-d-arrow-right"></el-button>
       </div>
+    </div>
+    <div class="no-comment" v-else>
+      aucun commentaire
     </div>
   </div>
 </template>
@@ -36,6 +39,7 @@ export default {
     const total = computed(() => props.comments.meta ? props.comments.meta.last_page : 0)
     const currentPage = computed(() => props.comments.meta ? props.comments.meta.current_page: 0)
 
+    const hasComments = computed(() => props.comments.data && props.comments.data.length)
     const hasNext = computed(() => props.comments.links && props.comments.links.next ? false : true)
     const hasPrevious = computed(() => props.comments.links && props.comments.links.prev ? false : true)
 
@@ -51,6 +55,7 @@ export default {
       first,
       hasNext,
       hasPrevious,
+      hasComments,
       total,
       currentPage
     }
@@ -65,6 +70,12 @@ export default {
     font-size: 1.5rem;
     font-weight: 800;
     text-align: center;
+  }
+
+  .no-comment {
+    text-align: center;
+    margin: 4rem 0;
+    color: var(--text-primary);
   }
 
   .pagination {
