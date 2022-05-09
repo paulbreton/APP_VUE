@@ -20,7 +20,6 @@ export const mutations = {
     state.game = game
   },
   setComments(state, comments) {
-    comments.data = comments.data.reverse() 
     state.comments = comments
   },
 }

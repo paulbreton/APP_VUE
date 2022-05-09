@@ -23,7 +23,7 @@ class CommentController extends AbstractApiController
 
     public function index(Game $game) {
         $comments = Comment::where('game_id', '=', $game->id)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->paginate(5);
 
         return CommentResource::collection($comments);
