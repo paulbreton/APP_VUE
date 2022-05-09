@@ -1,20 +1,24 @@
 <template>
   <div class="comment-zone">
-    <div class="title">Question ?</div>
+    <div class="title">Commentaires</div>
     <div class="list">
       <Comment v-for="comment in comments.data" :key="comment.id" :comment="comment" />
     </div>
     <div class="pagination">
-      <el-button @click="first" type="text" :disabled="hasPrevious" icon="el-icon-d-arrow-left"></el-button>
-      <el-button @click="previous" type="text" :disabled="hasPrevious" icon="el-icon-arrow-left"></el-button>
-      <div>{{ currentPage }} / {{ total }}</div>
-      <el-button @click="next" type="text" :disabled="hasNext" icon="el-icon-arrow-right"></el-button>
-      <el-button @click="last" type="text" :disabled="hasNext" icon="el-icon-d-arrow-right"></el-button>
+      <div>
+        <el-button @click="first" type="text" :disabled="hasPrevious" icon="el-icon-d-arrow-left"></el-button>
+        <el-button @click="previous" type="text" :disabled="hasPrevious" icon="el-icon-arrow-left">Précédent</el-button>
+      </div>
+      <div>{{ currentPage }} / {{ total }}</div>
+      <div>
+        <el-button @click="next" type="text" :disabled="hasNext">Suivant <i class="el-icon-arrow-right"></i></el-button>
+        <el-button @click="last" type="text" :disabled="hasNext" icon="el-icon-d-arrow-right"></el-button>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import { computed, ref } from '@vue/composition-api'
+import { computed } from '@vue/composition-api'
 import Comment from './Comment.vue'
 import { useStore } from '@nuxtjs/composition-api'
 export default {
@@ -66,7 +70,7 @@ export default {
   .pagination {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     color: var(--text-primary);
     div {
       padding: 0.5rem;
@@ -75,7 +79,7 @@ export default {
       color: var(--text-secondary);
 
       &.is-disabled {
-        color: var(--text-secondary-disabled);
+        color: var(--text-primary-disabled);
       }
     }
     button:focus {

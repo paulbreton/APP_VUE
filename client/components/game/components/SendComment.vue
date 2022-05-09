@@ -1,6 +1,6 @@
 <template>
   <div class="send">
-    <div>Pose ta question</div>
+    <div class="title">Pose ta question</div>
     <div class="input">
       <Input placeholder="Envoyer une question" :value.sync="comment" @handle-focus="progressOn" @handle-blur="progressOff" @handle-input="handleComment" @handle-enter="send" />
       <font-awesome-icon icon="fa-solid fa-paper-plane" class="icon-send" :class="{ disabled: comment === '' }" @click="send" />
@@ -10,13 +10,13 @@
 <script>
 import Input from '@/components/form/Input'
 import { ref } from '@vue/composition-api'
-import { useContext, useStore } from '@nuxtjs/composition-api'
+import { useStore } from '@nuxtjs/composition-api'
 
 export default {
   components: {
     Input
   },
-  setup(props) {
+  setup() {
     const store = useStore()
     const comment = ref('')
     const handleComment = (value) => {
@@ -52,6 +52,12 @@ export default {
 .send {
   margin-top: 4rem;
   color: var(--text-secondary);
+  .title {
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-align: center;
+  }
   .input {
     margin-top: 0.25rem;
     display: flex;
