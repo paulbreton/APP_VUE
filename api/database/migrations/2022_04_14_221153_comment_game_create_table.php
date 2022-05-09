@@ -19,7 +19,7 @@ class CommentGameCreateTable extends Migration
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->unsignedBigInteger('game_id')->unsigned();
             $table->string('content', 500);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('game_id')->references('id')->on('game')->onDelete('cascade');
 
             $table->softDeletes();
