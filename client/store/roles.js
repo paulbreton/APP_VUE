@@ -1,6 +1,6 @@
-export const state = {
+export const state = () => ({
   roles: [],
-}
+})
 
 export const mutations = {
   setRoles(state, roles) {

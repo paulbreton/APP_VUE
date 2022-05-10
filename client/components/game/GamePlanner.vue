@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { useForm } from './functions/form'
+import useForm from './functions/form'
 export default {
   components: {},
   setup(_, {refs}) {

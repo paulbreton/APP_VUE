@@ -2,7 +2,7 @@ import { ref } from '@vue/composition-api'
 import { useContext, useRouter } from '@nuxtjs/composition-api'
 import { error, success, commonError } from '@/assets/utils/Notification'
 
-export function useForm(refs) {
+export default function useForm(refs) {
 
   const context = useContext()
   const router = useRouter()

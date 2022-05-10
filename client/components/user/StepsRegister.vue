@@ -10,16 +10,10 @@
 <script>
 import { ref, emit } from '@vue/composition-api'
 import Register from './Register.vue'
-import Personality from './Personnality.vue'
-import Congratulation from './Congratulation.vue'
-import Login from './Login.vue'
 
 export default {
     components: {
         Register,
-        Personality,
-        Congratulation,
-        Login,
     },
     props: {
         loading: {

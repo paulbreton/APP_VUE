@@ -1,10 +1,10 @@
-export const state = {
+export const state =  () => ({
   gamesVisible: [],
   gamesMyDraft: [],
   gamesNoDraft: [],
   game: {},
   comments: [],
-}
+})
 
 export const mutations = {
   setGamesVisible(state, games) {

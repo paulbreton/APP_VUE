@@ -55,11 +55,11 @@ nav {
     color: var(--text-primary);
 
     a:hover {
-        color: var(--text-secondary);
+      color: var(--text-secondary);
         
     }
     .title {
-        color: var(--text-secondary);
+      color: var(--text-secondary);
     }
 }
 //

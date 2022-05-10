@@ -1,52 +1,49 @@
 <template>
-    <div class="container-login">
-        <Login @login="login" :loading="loading" />
-    </div>    
+  <div class="container-login">
+    <Login @login="login" :loading="loading" />
+  </div>    
 </template>
 
 <script>
+import { ref } from '@vue/composition-api'
 import Login from '../../components/user/Login.vue'
+import { useContext } from '@nuxtjs/composition-api'
+import { error, success } from '@/assets/utils/Notification'
 export default {
-    middleware: 'guest',
-    head: {
-        title: '',
-        meta: [
-            { hid: 'description', name: 'description', content: 'Login page' }
-        ],
-    },
-    components: {
-        Login
-    },
-    data: function () {
-        return {
-            loading: false,
-        }
-    },
-    methods: {
-        async login(user) {
-            this.loading = true
-            try {
-                await this.$auth.loginWith('laravelSanctum', {data: user})
-                this.loading = false
-            } catch (err) {
-                this.loading = false
-                this.$message.error('Echec de la connexion');
-                if (err.response.status = 422) {
-                    this.errors = 'Could not sign you in with those credentials.'
-                }
-            }
-        }
+  middleware: 'guest',
+  components: {
+    Login
+  },
+  setup() {
+    const { $auth } = useContext()
+    const loading = ref(false)
+
+    const login = async (user) => {
+      loading.value = true
+      try {
+        await $auth.loginWith('laravelSanctum', {data: user})
+        loading.value = false
+        success('Bonjour ' + $auth.user.data.username)
+      } catch (err) {
+        loading.value = false
+        error('Echec de la connexion')
+      }
     }
+
+    return {
+      loading,
+      login,
+    }
+  },
 }
 </script>
 <style lang="css" scoped>
 .container-login {
-    height: calc(100vh - 76px);
-    overflow: hidden;
-    background-color: var(--background);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  height: calc(100vh - 76px);
+  overflow: hidden;
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-
 </style>

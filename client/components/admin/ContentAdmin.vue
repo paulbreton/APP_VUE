@@ -1,40 +1,40 @@
 <template>
-   <div class="content-admin padding-content">
-        <div class="stat">
-            <CardStat />
-        </div>
-        <div class="list-user">
-            <CardTable title="Utilisateur inscrit">
-                <template v-slot:list>
-                    <ListUser :data="users" />
-                </template>
-                <template>
-                    <NuxtLink to="/admin/users">
-                        <el-button icon="el-icon-plus">TdB Utilisateurs</el-button>
-                    </NuxtLink>
-                </template>                
-            </CardTable>
-        </div>
-        <div class="list-planned-game">
-            <CardTable title="Parties planifiées">
-                <template v-slot:list>
-                    <ListGame :games="gamesNoDraft" @update="updateGame" />
-                </template>
-            </CardTable>
-        </div>
-        <div class="list-drafts-game">
-            <CardTable title="Parties caché">
-                <template v-slot:list>
-                    <ListGame :games="gamesMyDraft" @update="updateGame"/>
-                </template>
-                <template>
-                    <NuxtLink to="game/new" exact>
-                        <el-button icon="el-icon-plus">Ajouter</el-button>
-                    </NuxtLink>
-                </template>                
-            </CardTable>
-        </div>
-    </div>
+  <div class="content-admin padding-content">
+		<div class="stat">
+			<CardStat />
+		</div>
+		<div class="list-user">
+			<CardTable title="Utilisateur inscrit">
+				<template v-slot:list>
+					<ListUser :data="users" />
+				</template>
+				<template>
+					<NuxtLink to="/admin/users">
+						<el-button icon="el-icon-plus">TdB Utilisateurs</el-button>
+					</NuxtLink>
+				</template>                
+			</CardTable>
+		</div>
+		<div class="list-planned-game">
+			<CardTable title="Parties planifiées">
+				<template v-slot:list>
+					<ListGame :games="gamesNoDraft" @update="updateGame" />
+				</template>
+			</CardTable>
+		</div>
+		<div class="list-drafts-game">
+			<CardTable title="Parties caché">
+				<template v-slot:list>
+					<ListGame :games="gamesMyDraft" @update="updateGame"/>
+				</template>
+				<template>
+					<NuxtLink to="game/new" exact>
+						<el-button icon="el-icon-plus">Ajouter</el-button>
+					</NuxtLink>
+				</template>                
+			</CardTable>
+		</div>
+  </div>
 </template>
 
 <script>
@@ -49,39 +49,39 @@ import ItemGame from '@/components/game/components/ItemGame.vue'
 import CardList from '@/components/shared/cards/CardList.vue'
 
 export default defineComponent({
-    components: {
-        CardStat,
-        CardTable,
-        ListUser,
-        ListGame,
-        CardList,
-        ItemGame,
-    },
-    setup() {
-        const store = useStore()
+	components: {
+		CardStat,
+		CardTable,
+		ListUser,
+		ListGame,
+		CardList,
+		ItemGame,
+	},
+	setup() {
+			const store = useStore()
 
-        onMounted(async () => {
-            await store.dispatch('user/fetchAllUsers')
-            await store.dispatch('roles/fetch')
-            await store.dispatch('game/fetchMyDraft',  store.state.auth.user.data.id)
-            await store.dispatch('game/fetchGameNoDraft')
-        })
+			onMounted(async () => {
+				await store.dispatch('user/fetchAllUsers')
+				await store.dispatch('roles/fetch')
+				await store.dispatch('game/fetchMyDraft',  store.state.auth.user.data.id)
+				await store.dispatch('game/fetchGameNoDraft')
+			})
 
-        const users = computed(() => store.state.user.users)
-        const gamesMyDraft = computed(() => store.state.game.gamesMyDraft)
-        const gamesNoDraft = computed(() => store.state.game.gamesNoDraft)
+			const users = computed(() => store.state.user.users)
+			const gamesMyDraft = computed(() => store.state.game.gamesMyDraft)
+			const gamesNoDraft = computed(() => store.state.game.gamesNoDraft)
 
-        const updateGame = async (payload) => {
-            await store.dispatch('game/updateGame', { game: payload.game, visibility: payload.visibility })
-        }
+			const updateGame = async (payload) => {
+				await store.dispatch('game/updateGame', { game: payload.game, visibility: payload.visibility })
+			}
 
-        return {
-            users,
-            gamesMyDraft,
-            gamesNoDraft,
-            updateGame
-        }
-    },
+			return {
+				users,
+				gamesMyDraft,
+				gamesNoDraft,
+				updateGame
+			}
+	},
 })
 </script>
 

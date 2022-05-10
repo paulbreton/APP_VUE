@@ -1,58 +1,56 @@
 <template>
-    <div class="container-register">
-        <Steps-register @newUser="register" :loading="loading"/>
-    </div>
+	<div class="container-register">
+		<Steps-register @newUser="register" :loading="loading"/>
+	</div>
 </template>
 
 <script>
+import { ref } from '@vue/composition-api'
 import StepsRegister from '../../components/user/StepsRegister.vue'
+import { useContext } from '@nuxtjs/composition-api'
+import { commonError, error, success } from '@/assets/utils/Notification'
+export default {
+	middleware: 'guest',
+	components: {
+		'Steps-register': StepsRegister,
+	},
+	setup() {
+		const { $axios, $auth } = useContext()
+		const loading = ref(false)
 
-    export default {
-        middleware: 'guest',
-        head: {
-            title: ' | Register',
-            meta: [
-                { hid: 'description', name: 'description', content: 'Registration page' }
-            ],
-        },
-        components: {
-            'Steps-register': StepsRegister,
-        },
-        data: ()=> ({
-            errors: [],
-            loading: false,
-        }),
-        methods: {
-            async register(user) {
-                this.loading = true
-                try {
-                    let errors = []
-                    await this.$axios.$get('sanctum/csrf-cookie')
-                    await this.$axios.$post('/register', user)
-                        .then((resp) => {})
-                        .catch((err) => {
-                            if (err.response.status = 422) {
-                                errors = err.response.data.errors
-                            }
-                        })
-                        this.errors = errors
-                    await this.$auth.loginWith('laravelSanctum', {data: this.form})
-                    this.loading = false
-                } catch (error) {
-                    this.loading = false
-                }
-            }
-        }
-    }
+		const register = async (user) => {
+			loading.value = true
+			try {
+				await $axios.$get('sanctum/csrf-cookie')
+				await $axios.$post('/register', user)
+				await $auth.loginWith('laravelSanctum', {data: user})
+				success('Inscription validée')
+				loading.value = false
+			} catch (err) {
+				console.log(err.response)
+				if(err.response.data.errors.email) {
+					error('Email déjà utilisé')
+				} else {
+					commonError()
+				}
+				loading.value = false
+			}
+		}
+
+		return {
+			loading,
+			register
+		}
+	}
+}
 </script>
 <style scoped>
 .container-register {
-    height: calc(100vh - 76px);
-    background-color: var(--background);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 3rem;
+	height: calc(100vh - 76px);
+	background-color: var(--background);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0 3rem;
 }
-
 </style>

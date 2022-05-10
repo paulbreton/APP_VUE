@@ -46,11 +46,11 @@ export default {
   min-width: 20rem;
   
   .title {
-      text-align: center;
-      color: var(--text-primary);
-      padding: 1rem 0;
-      font-weight: 800;
-      font-size: 1.25rem;
+    text-align: center;
+    color: var(--text-primary);
+    padding: 1rem 0;
+    font-weight: 800;
+    font-size: 1.25rem;
   }
   .actions {
     color: var(--text-primary);
@@ -62,14 +62,12 @@ export default {
       outline: none;
       color: var(--text-primary);
     }
-
     .el-button i,
     button:hover  {
       color: var(--text-secondary);
       outline: none;
     }
-  }
-    
+  }    
 }
 
 </style>
