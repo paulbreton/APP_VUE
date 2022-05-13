@@ -43,7 +43,4 @@ export default {
   padding: 1rem;
   width: 100%;
 }
-.users {
-  margin-top: 3rem;
-}
 </style>

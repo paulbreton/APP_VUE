@@ -1,7 +1,7 @@
 <template>
   <div>
     <div :class="{ 'is-auth-page': showNav }"><Nav /></div>
-    <div class="content"><Nuxt /></div>
+    <div class="layout"><Nuxt /></div>
     <div :class="{ 'is-auth-page': showNav }"><NavMobile /></div>
   </div>
 </template>
@@ -39,18 +39,18 @@ export default {
 //
 // MOBILE
 //
-.content {
+.layout {
   padding: var(--padding-content-mobile);
-  margin-bottom: 5rem;
+  padding-top: 2rem;
 }
 
 //
 // TABLET
 //
 @media screen and (min-width: 1024px) {
-  .content {
+  .layout {
     padding: var(--padding-content-tablet);
-    margin-top: 4rem;
+    padding-top: 4rem;
   }
 }
 
@@ -58,9 +58,9 @@ export default {
 // DESKTOP
 //
 @media screen and (min-width: 1280px) {
-  .content {
+  .layout {
     padding: var(--padding-content-desktop);
-    margin-top: 4rem;
+    padding-top: 4rem;
   }
 }
 </style>
