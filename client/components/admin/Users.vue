@@ -1,8 +1,5 @@
 <template>
   <div class="users card-admin">
-    <div class="title">
-      Les utilisateurs
-    </div>
     <List :data="users"/>
   </div>
 </template>
@@ -36,9 +33,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.titre {
-    text-align: center;
-}
 .table {
   padding: 1rem;
   width: 100%;
