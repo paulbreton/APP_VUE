@@ -10,22 +10,19 @@ use App\Models\Roles;
 use App\Models\User;
 use App\Managers\UserManager;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends AbstractApiController
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
+     * @param UserManager $userManager
+     * @return AnonymousResourceCollection
      */
-    public function index(UserManager $userManager) {
-        $listUsers = $userManager->getAll();
-        $listUsers->getCollection()->transform(function (User $user) {
-            return UserResource::make($user);
-        });
-        return response($listUsers);
+    public function index(UserManager $userManager)
+    {
+        return UserResource::collection($userManager->getAll());
     }
     /**
      * Display the specified resource.
