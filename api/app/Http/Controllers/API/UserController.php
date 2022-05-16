@@ -21,7 +21,11 @@ class UserController extends AbstractApiController
      * @return Response
      */
     public function index(UserManager $userManager) {
-        return response(UserResource::collection($userManager->getAll()));
+        $listUsers = $userManager->getAll();
+        $listUsers->getCollection()->transform(function (User $user) {
+            return UserResource::make($user);
+        });
+        return response($listUsers);
     }
     /**
      * Display the specified resource.

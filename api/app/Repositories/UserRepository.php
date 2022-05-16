@@ -9,9 +9,9 @@ class UserRepository extends BaseRepository
     {
         parent::__construct($model);
     }
-    
+
     public function getAll() {
-        return User::where('id', '!=', Auth::id())->get();
+        return User::where('id', '!=', Auth::id())->paginate(10);
     }
 
     public function deleteUser(int $id) {
