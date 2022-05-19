@@ -10,7 +10,7 @@
 				</template>
 				<template>
 					<NuxtLink to="/admin/users">
-						<el-button icon="el-icon-plus">TdB Utilisateurs</el-button>
+						<el-button icon="el-icon-plus">Voir plus</el-button>
 					</NuxtLink>
 				</template>                
 			</CardTable>
@@ -61,13 +61,13 @@ export default defineComponent({
 			const store = useStore()
 
 			onMounted(async () => {
-				await store.dispatch('user/fetchAllUsers')
+				await store.dispatch('user/fetch')
 				await store.dispatch('roles/fetch')
 				await store.dispatch('game/fetchMyDraft',  store.state.auth.user.data.id)
 				await store.dispatch('game/fetchGameNoDraft')
 			})
 
-			const users = computed(() => store.state.user.users)
+			const users = computed(() => store.getters['user/data'])
 			const gamesMyDraft = computed(() => store.state.game.gamesMyDraft)
 			const gamesNoDraft = computed(() => store.state.game.gamesNoDraft)
 

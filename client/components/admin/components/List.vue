@@ -1,7 +1,10 @@
 <template>
-  <div class="list" v-if="data.length" v-loading="!loading">
+  <div class="list" v-if="data && data.length" v-loading="!loading">
     <Item v-for="user in data" :key="user.id" :user="user" @open-dialog="openDialog" />
     <Dialog :show="showDialog" :user="userSelected" @close-dialog="closeDialog"/>
+    <div class="pagination">
+      <slot name="pagination"></slot>
+    </div>
   </div>
   <div v-else class="no-data">
     Aucune donnée
@@ -26,7 +29,7 @@ export default {
   },
   setup(props) {
     const store = useStore()
-    const loading = computed(() => props.data.length)
+    const loading = computed(() => props.data && props.data.length)
     const showDialog = ref(false)
 
     const userSelected = ref({})

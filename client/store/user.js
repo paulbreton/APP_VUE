@@ -1,9 +1,14 @@
+import { storePagination } from "~/assets/utils/Store"
+
+let { statePage, gettersPage, mutationsPage, actionsPage } = storePagination('users') 
+
 export const state = () => ({
-  users: [],
-  user: null
+  ...statePage,
+  user: null,
 })
 
 export const mutations = {
+  ...mutationsPage,
   setUsers (state, users) {
     state.users = users
   },
@@ -13,25 +18,23 @@ export const mutations = {
 }
 
 export const getters = {
+  ...gettersPage,
   get: (state) => state.user,
 }
 
 export const actions = {
-  async fetchAllUsers({ commit }) {
-    const users = await this.$axios.$get('api/users')
-    commit('setUsers', users)
-  },
+  ...actionsPage,
   async fetchUser({ commit }, user) {
     commit('setUser', user)
   },
   async delete({ dispatch }, id) {
     await this.$axios.$delete(`api/user/${id}`)
-    dispatch('fetchAllUsers')
+    dispatch('fetch')
   },
   async update({ dispatch }, params) {
     await this.$axios.$put(`api/user/${params.userId}`, { 
       'role_id': params.roleId,
      })
-    dispatch('fetchAllUsers')
+    dispatch('fetch')
   }
 }

@@ -1,6 +1,10 @@
 <template>
   <div class="users card-admin">
-    <List :data="users"/>
+    <List :data="users">
+      <template v-slot:pagination>
+        <PaginationAdmin />
+      </template>
+    </List>
   </div>
 </template>
 
@@ -8,25 +12,25 @@
 import { computed, useStore } from '@nuxtjs/composition-api'
 import { onMounted, ref } from '@vue/composition-api'
 import List from './components/List.vue'
+import PaginationAdmin from '../shared/paginations/PaginationAdmin.vue'
 
 export default {
   components: {
     List,
+    PaginationAdmin,
   },
   setup() {
     const store = useStore()
-    const loading = ref(false)
-    const users = computed(() => store.state.user.users)
+    const users = computed(() => store.getters['user/data'])
 
-    onMounted(() =>  {
-      if(users.value.length === 0){
-        store.dispatch('user/fetchAllUsers')
+    onMounted(() => {
+      if(users.value.length === 0) {
+        store.dispatch('user/fetch')
       }
     })
 
     return {
-      users,
-      loading,
+      users
     }
   }
 }
