@@ -2,7 +2,7 @@
   <div class="users card-admin">
     <List :data="users">
       <template v-slot:pagination>
-        <PaginationAdmin />
+        <PaginationAdmin module="user"/>
       </template>
     </List>
   </div>

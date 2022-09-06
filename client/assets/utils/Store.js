@@ -23,7 +23,15 @@ export function storePagination (module) {
       async fetch({ commit }) {
         const list = await this.$axios.get(`api/${module}`)
         commit('setList', list.data)
-      }
+      },
+      async switchByPage({ commit }, page) {
+        const list = await this.$axios.get(`api/${module}?page=${page}`)
+        commit('setList', list.data)
+      },
+      async switchByUrl({ commit }, url) {
+        const list = await this.$axios.get(url)
+        commit('setList', list.data)
+      },
     }
   }
 }

@@ -11,7 +11,7 @@ class UserRepository extends BaseRepository
     }
 
     public function getAll() {
-        return User::where('id', '!=', Auth::id())->paginate(10);
+        return User::where('id', '!=', Auth::id())->paginate(4);
     }
 
     public function deleteUser(int $id) {

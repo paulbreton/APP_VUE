@@ -2,7 +2,7 @@
   <div class="list" v-if="data && data.length" v-loading="!loading">
     <Item v-for="user in data" :key="user.id" :user="user" @open-dialog="openDialog" />
     <Dialog :show="showDialog" :user="userSelected" @close-dialog="closeDialog"/>
-    <div class="pagination">
+    <div>
       <slot name="pagination"></slot>
     </div>
   </div>
